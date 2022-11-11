@@ -1,0 +1,25 @@
+﻿<Window x:Class="WpfApp3.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp3"
+        xmlns:controls="clr-namespace:Fantasy.Wpf.NodeEditControl.Controls;assembly=Fantasy.Wpf.NodeEditControl"
+        xmlns:nodes="clr-namespace:Fantasy.Wpf.NodeEditControl.Controls.Nodes;assembly=Fantasy.Wpf.NodeEditControl"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <InkCanvas EditingMode="None">
+        <nodes:ConstNode></nodes:ConstNode>
+        <nodes:ConstNode Position="300,300"></nodes:ConstNode>
+        <nodes:ConstNode Position="600,300"></nodes:ConstNode>
+        <nodes:AdditionNode Position="200,200"></nodes:AdditionNode>
+        <nodes:AdditionNode Position="300,500"></nodes:AdditionNode>
+       
+        <controls:ArrowLine StartPiont="50,50" EndPoint="300,300" Color="Red"></controls:ArrowLine>
+        <controls:ArrowLine StartPiont="80,50" EndPoint="330,300" Color="Red"></controls:ArrowLine>
+        <controls:ArrowLine StartPiont="80,50" EndPoint="330,300" Color="Red"></controls:ArrowLine>
+        <controls:ArrowLine StartPiont="70,50" EndPoint="130,300" Color="Red"></controls:ArrowLine>
+        <controls:ArrowLine StartPiont="100,50" EndPoint="430,300" Color="Red"></controls:ArrowLine>
+        <controls:ArrowLine StartPiont="90,50" EndPoint="230,300" Color="Red"></controls:ArrowLine>
+    </InkCanvas>
+</Window>
