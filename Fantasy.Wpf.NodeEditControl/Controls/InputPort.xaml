@@ -9,6 +9,6 @@
                 PortType="Input"
             >
     
-        <Ellipse x:Name="input" Width="30" Height="30" Fill="White"></Ellipse> 
+        <Ellipse x:Name="input" Width="20" Height="20" Fill="White"></Ellipse> 
     
 </local:PortBase>

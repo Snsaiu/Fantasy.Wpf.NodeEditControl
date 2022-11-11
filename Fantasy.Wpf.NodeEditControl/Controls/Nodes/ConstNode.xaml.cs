@@ -38,7 +38,22 @@ namespace Fantasy.Wpf.NodeEditControl.Controls.Nodes
         }
         public override OutputData Calculate()
         {
-            return new OutputData { Data=this.index,DataType=typeof(int)};
+            string content = this.inputTxt.Text;
+            var od = new OutputData();
+            if (int.TryParse(content,out int x))
+            {
+                od.DataType = typeof(int);
+            }
+            else if(double.TryParse(content,out double y))
+            {
+                od.DataType = typeof(double);
+            }
+            else
+            {
+                od.DataType = typeof(string);
+            }
+            od.Data = content;
+            return od;
         }
 
         protected override string GetNodeName()
@@ -48,7 +63,7 @@ namespace Fantasy.Wpf.NodeEditControl.Controls.Nodes
 
         protected override Size GetNodeSize()
         {
-           return new Size(300,200);
+           return new Size(200,100);
         }
 
         protected override List<PortBase> GetPorts()

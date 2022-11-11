@@ -14,6 +14,7 @@
         <nodes:ConstNode Position="600,300"></nodes:ConstNode>
         <nodes:AdditionNode Position="200,200"></nodes:AdditionNode>
         <nodes:AdditionNode Position="300,500"></nodes:AdditionNode>
+        <nodes:MultiplicationNode></nodes:MultiplicationNode>
        
         <controls:ArrowLine StartPiont="50,50" EndPoint="300,300" Color="Red"></controls:ArrowLine>
         <controls:ArrowLine StartPiont="80,50" EndPoint="330,300" Color="Red"></controls:ArrowLine>

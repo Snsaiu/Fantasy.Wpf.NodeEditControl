@@ -8,6 +8,6 @@
                 PortType="Output"
              d:DesignHeight="450" d:DesignWidth="800">
     
-        <Ellipse Width="30" Name="output" Height="30" Fill="White"></Ellipse>
+        <Ellipse Width="20" Name="output" Height="20" Fill="White"></Ellipse>
     
 </local:PortBase>
