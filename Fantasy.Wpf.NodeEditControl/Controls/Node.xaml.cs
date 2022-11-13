@@ -1,5 +1,7 @@
 ﻿
 
+using Fantasy.Wpf.NodeEditControl.Data;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -55,6 +57,11 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
         }
 
         public override List<Type> SupportOutputTypes()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override OutputData Calculate()
         {
             throw new NotImplementedException();
         }

@@ -23,11 +23,7 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
         protected abstract List<PortBase> GetPorts();
 
 
-        public  virtual OutputData Calculate()
-        {
-
-            return new OutputData();
-        }
+        public abstract OutputData Calculate();
 
         protected abstract Size GetNodeSize();
 
@@ -36,6 +32,12 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
         /// </summary>
         /// <returns></returns>
         protected abstract string GetNodeName();
+
+
+        protected virtual NodeContainerBase CreateNodeContainerStyle()
+        {
+            return new NodeContainer();
+        }
 
 
         /// <summary>
@@ -69,7 +71,15 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
 
                 var sonChild = this.Content as FrameworkElement;
                 this.Content = null;
-                NodeContainerBase nc = new NodeContainer(this.GetNodeSize(),this.IsCalculateNode,this.GetNodeName());
+                NodeContainerBase nc =  this.CreateNodeContainerStyle();
+                if (nc == null)
+                    throw new NullReferenceException();
+                
+          
+               nc.SetNodeName(this.GetNodeName());
+                nc.IsCalculateNode(this.IsCalculateNode);
+                nc.SetNodeSize(this.GetNodeSize());
+
                 nc.CalculateEvent += () =>
                 {
                     var data= this.Calculate();

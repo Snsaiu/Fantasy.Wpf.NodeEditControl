@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml.Linq;
 
 namespace Fantasy.Wpf.NodeEditControl.Controls
 {
@@ -26,12 +27,11 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
     {
 
 
-        public NodeContainer(Size size,bool isCalculateNode, string name):base(size,isCalculateNode,name)
+        public NodeContainer()
         {
             InitializeComponent();
-            this.rg.Rect = new Rect(size);
-            this.refreshBtn.Visibility = isCalculateNode ? Visibility.Visible : Visibility.Collapsed;
-            this.title.Text=name;
+          
+           
             this.refreshBtn.Click += (s, e) =>
             {
                 this.CalculateEvent?.Invoke();
@@ -41,11 +41,25 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
 
         public override event CalculateDelegate CalculateEvent;
 
+        public override void IsCalculateNode(bool isCalculateNode)
+        {
+            this.refreshBtn.Visibility = isCalculateNode ? Visibility.Visible : Visibility.Collapsed;
+        
+        }
+
         public override void SetContent(FrameworkElement content)
         {
             this.container.Content=content;
         }
 
-   
+        public override void SetNodeName(string name)
+        {
+            this.title.Text = name;
+        }
+
+        public override void SetNodeSize(Size size)
+        {
+            this.rg.Rect = new Rect(size);
+        }
     }
 }
