@@ -20,7 +20,7 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
 
         private List<PortBase> _ports;
 
-        protected abstract List<PortBase> GetPorts();
+        public abstract List<PortBase> GetPorts();
 
         public NodeCanvasBase Canvas { get; set; }
 

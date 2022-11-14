@@ -41,7 +41,7 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
             return  new Size(400, 300);
         }
 
-        protected override List<PortBase> GetPorts()
+        public override List<PortBase> GetPorts()
         {
             List<PortBase> res = new List<PortBase>() { 
             this.input1,

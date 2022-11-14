@@ -26,6 +26,41 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
         public abstract void UpdateLineWidth(int width);
 
 
+        public LineBase()
+        {
+            this.Loaded += (s, e) =>
+            {
+                this.CommonStyle();
+
+                this.MouseEnter += (ss, ee) =>
+                {
+                    this.WhenTouchStyle();
+                };
+                this.MouseLeave += (ss, ee) =>
+                {
+                    this.CommonStyle();
+                };
+
+            };
+        }
+
+        /// <summary>
+        /// 默认线条风格
+        /// </summary>
+        public virtual void CommonStyle()
+        {
+
+        }
+
+        /// <summary>
+        /// 当触碰到线条
+        /// </summary>
+        public virtual void WhenTouchStyle()
+        {
+           
+        }
+
+
         /// <summary>
         /// header node ,without triangle port
         /// </summary>
@@ -94,6 +129,36 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
                        var res= Tools.IsArrayIntersection<Type>(port.Node.SupportInputTypes(), this.HeaderNode.SupportOutputTypes());
                         if(res)
                         {
+
+                            var ports=this.HeaderNode.GetPorts();
+                            if(ports==null)
+                            {
+                                throw new NullReferenceException();
+                            }
+                            var outputPorts=ports.Where(x=>x.PortType==Enums.PortType.Output).ToList();
+
+                            for (int i = 0; i < port.ConnectedLines.Count; i++)
+                            {
+                               
+                                if(outputPorts!=null&&outputPorts.Count!=0)
+                                {
+                                    for (int j = 0; j < outputPorts.Count; j++)
+                                    {
+                                        var find= outputPorts[j].ConnectedLines.Where(x => x == port.ConnectedLines[i]).FirstOrDefault();
+                                        if(find!=null)
+                                        {
+                                            outputPorts[j].RemoveLine(find);
+                                        }    
+                                    }
+                                }
+
+                                this.Canvas.RemoveLine(port.ConnectedLines[i]);
+                                port.RemoveLine(port.ConnectedLines[i]);
+                                i--;
+                            }
+
+                          
+                            
                             port.AddLine(this);
                             this.TailNode = port.Node;
                         }

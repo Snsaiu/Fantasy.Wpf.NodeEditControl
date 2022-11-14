@@ -66,7 +66,7 @@ namespace Fantasy.Wpf.NodeEditControl.Controls.Nodes
            return new Size(200,100);
         }
 
-        protected override List<PortBase> GetPorts()
+        public override List<PortBase> GetPorts()
         {
             return new List<PortBase> { this.output };
 

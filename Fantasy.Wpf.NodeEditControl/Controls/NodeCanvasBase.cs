@@ -56,12 +56,15 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
                         this._newLine = p.CreateLine();
                         if (this._newLine != null)
                         {
+                            this._newLine.Canvas = this;
                             this.CreateLine(this._newLine);
                             p.AddLine(this._newLine);
+
 
                             if (p.PortType == Enums.PortType.Output)
                             {
                                 this._newLine.UpdateEndPoint(position);
+                                this._newLine.ValidateConnectStartPort(element);
                             }
                             else
                             {
@@ -119,10 +122,10 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
                         {
                             this.RemoveLine(this._newLine);
                             p.RemoveLine(this._newLine);
-                            this._newLine = null;
+                          
                         }
+                        this._newLine = null;
 
-                       
                     }
                 }
 

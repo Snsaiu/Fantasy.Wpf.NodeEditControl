@@ -80,7 +80,7 @@ namespace Fantasy.Wpf.NodeEditControl.Controls.Nodes
             return d;
         }
 
-        protected override List<PortBase> GetPorts()
+        public override List<PortBase> GetPorts()
         {
             return new List<PortBase>()
             {

@@ -38,9 +38,10 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
 
             };
 
-           
-        
         }
+
+
+
 
         /// <summary>
         /// get port mask,when line connect usercontrol,the mark will be connected
@@ -118,6 +119,11 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
             if (line == null) throw new ArgumentNullException();
             if(this.ConnectedLines.Contains(line)) return;
             this.ConnectedLines.Add(line);
+        }
+
+        public void ClearLines()
+        {
+            this.ConnectedLines.Clear();
         }
         public void RemoveLine(LineBase line)
         {

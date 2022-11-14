@@ -42,10 +42,10 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
             this.line.StrokeThickness = this.LineWidth;
             this.triangle.Stroke = this.Color;
             
-            this.triangle.MouseDown += (s, e) =>
-            {
-                this._triangleCanMove = true;
-            };
+            //this.triangle.MouseDown += (s, e) =>
+            //{
+            //    this._triangleCanMove = true;
+            //};
     
             //this.triangle.MouseUp += (s, e) =>
             //{
@@ -143,6 +143,21 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
             this.triangle.Fill= color;
         }
 
+        public override void CommonStyle()
+        {
+            this.tail.Stroke = this.Color;
+            this.line.Stroke = this.Color;
+            this.triangle.Stroke = this.Color;
+
+        }
+
+        public override void WhenTouchStyle()
+        {
+            this.tail.Stroke = new SolidColorBrush( Colors.Orange);
+            this.line.Stroke = new SolidColorBrush(Colors.Orange);
+            this.triangle.Stroke = new SolidColorBrush(Colors.Orange);
+        }
+
         public override void UpdateLineWidth(int width)
         {
             this._lineWidth = width;
@@ -151,8 +166,8 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
         }
         private void updateTriangle(double x1, double y1, double x2, double y2)
         {
-            double h = 20;
-            double w = (double)10;
+            double h = 5;
+            double w = (double)5;
 
             //线段首位端点部分的(△x,△y)横纵坐标差
             double dx = x2 - x1;
