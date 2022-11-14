@@ -13,17 +13,17 @@ using System.Windows.Shapes;
 
 namespace Fantasy.Wpf.NodeEditControl.Controls
 {
-    public abstract class LineBase : UserControl
+    public abstract class LineBase : UserControl, ICanvasElementBase
     {
 
+        public NodeCanvasBase Canvas { get; set; }
+        public abstract void UpdateStartPoint(Point point);
 
-        protected abstract void UpdateStartPoint(Point point);
+        public abstract void UpdateEndPoint(Point point);
 
-        protected abstract void UpdateEndPoint(Point point);
+        public abstract void UpdateColor(SolidColorBrush color);
 
-        protected abstract void UpdateColor(SolidColorBrush color);
-
-        protected abstract void UpdateLineWidth(int width);
+        public abstract void UpdateLineWidth(int width);
 
 
         /// <summary>
@@ -57,7 +57,7 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
         }
 
 
-        protected void ValidateConnectEndPort(DependencyObject control)
+        public void ValidateConnectEndPort(DependencyObject control)
         {
          
                 FrameworkElement uc =control as FrameworkElement;
@@ -118,7 +118,7 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
             
         }
 
-        protected void ValidateConnectStartPort(DependencyObject control)
+        public void ValidateConnectStartPort(DependencyObject control)
         {
             FrameworkElement uc = control as FrameworkElement;
             OutputPort port = null;

@@ -8,19 +8,6 @@
         xmlns:nodes="clr-namespace:Fantasy.Wpf.NodeEditControl.Controls.Nodes;assembly=Fantasy.Wpf.NodeEditControl"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <InkCanvas EditingMode="None">
-        <nodes:ConstNode></nodes:ConstNode>
-        <nodes:ConstNode Position="300,300"></nodes:ConstNode>
-        <nodes:ConstNode Position="600,300"></nodes:ConstNode>
-        <nodes:AdditionNode Position="200,200"></nodes:AdditionNode>
-        <nodes:AdditionNode Position="300,500"></nodes:AdditionNode>
-        <nodes:MultiplicationNode></nodes:MultiplicationNode>
-       
-        <controls:ArrowLine StartPiont="50,50" EndPoint="300,300" Color="Red"></controls:ArrowLine>
-        <controls:ArrowLine StartPiont="80,50" EndPoint="330,300" Color="Red"></controls:ArrowLine>
-        <controls:ArrowLine StartPiont="80,50" EndPoint="330,300" Color="Red"></controls:ArrowLine>
-        <controls:ArrowLine StartPiont="70,50" EndPoint="130,300" Color="Red"></controls:ArrowLine>
-        <controls:ArrowLine StartPiont="100,50" EndPoint="430,300" Color="Red"></controls:ArrowLine>
-        <controls:ArrowLine StartPiont="90,50" EndPoint="230,300" Color="Red"></controls:ArrowLine>
-    </InkCanvas>
+
+    <controls:NodeInkCanvas x:Name="canvas"></controls:NodeInkCanvas>
 </Window>

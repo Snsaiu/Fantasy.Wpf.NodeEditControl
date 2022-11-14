@@ -8,10 +8,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
+using System.Windows.Media;
 
 namespace Fantasy.Wpf.NodeEditControl.Controls
 {
-    public abstract class PortBase:UserControl
+    public abstract class PortBase:UserControl, ICanvasElementBase
     {
 
         /// <summary>
@@ -24,11 +26,19 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
         {
             this.ConnectedLines = new List<LineBase>();
 
-            this.GetPortMark().MouseDown += (s, e) =>
+
+            this.Loaded += (s, e) =>
             {
 
-                this.CreateLine();
+                this.GetPortMark().MouseDown += (s, e) =>
+                {
+                    if(e.MiddleButton==MouseButtonState.Pressed)
+                        this.CreateLine();
+                };
+
             };
+
+           
         
         }
 
@@ -120,7 +130,7 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
         /// <summary>
         /// when click ,port will create a line 
         /// </summary>
-        protected void CreateLine()
+        public LineBase CreateLine()
         {
             // determined the port is input type or output type
             
@@ -131,19 +141,56 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
             }
             else if(this.PortType==PortType.Output)
             {
-                var line= this.CreateInputLine();
-                this._createNewLine = line;
-                if(this._createNewLine != null)
-                {
-                    this._createNewLine.StartPiont = this.GetSelfPoint();
-
-                }
-
-                //this.AddLine(line);
+                //if (this._createNewLine == null)
+                //{
+                    var line = this.CreateInputLine();
+                    this._createNewLine = line;
+                    if (this._createNewLine != null)
+                    {
+                        this._createNewLine.UpdateStartPoint(GetSelfPoint());
+                       // var endp = this.GetSelfPoint();
+                       //endp.X = endp.X + 15;
+                       // endp.Y= endp.Y + 10;
+                       // this._createNewLine.UpdateEndPoint(endp);
+                       // this._createNewLine.MouseMove += createNewLineMove;
+                    }
+                   // this.Canvas.CreateLine(this._createNewLine);
+                   // this.AddLine(line);
+                //}
             }
+            return this._createNewLine;
             
 
         }
+
+        private void createNewLineMove(object sender, MouseEventArgs e)
+        {
+          if(e.MiddleButton==MouseButtonState.Pressed)
+            {
+                var endp = e.MouseDevice.GetPosition(this.Canvas);
+
+                endp.X = endp.X + 15;
+                endp.Y = endp.Y + 10;
+                if (this._createNewLine != null)
+                {
+                   
+                    this._createNewLine.UpdateEndPoint(endp);
+                }
+            }
+          else if(e.MiddleButton==MouseButtonState.Released)
+            {
+                this._createNewLine.MouseMove -= this.createNewLineMove;
+                if(this._createNewLine.TailNode==null)
+                {
+                    this.Canvas.RemoveLine(this._createNewLine);
+                    this.ConnectedLines.Remove(this._createNewLine);
+                    this._createNewLine = null;
+                }
+            }
+   
+        }
+
+
 
         /// <summary>
         /// set the port show line style
@@ -165,6 +212,7 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
 
 
         public List<LineBase> ConnectedLines { get; private set; }
+        public NodeCanvasBase Canvas { get; set ; }
     }
 
 }

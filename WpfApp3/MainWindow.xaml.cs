@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Fantasy.Wpf.NodeEditControl.Controls.Nodes;
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +25,11 @@ namespace WpfApp3
         public MainWindow()
         {
             InitializeComponent();
+
+            this.canvas.AddNode(new AdditionNode() { Position = new Point(200, 300),Canvas=this.canvas });
+            this.canvas.AddNode(new AdditionNode() { Position = new Point(300, 400),Canvas=this.canvas });
+            this.canvas.AddNode(new ConstNode() { Position = new Point(300, 400),Canvas=this.canvas });
+            this.canvas.AddNode(new ConstNode() { Position = new Point(300, 400),Canvas=this.canvas });
         }
     }
 }

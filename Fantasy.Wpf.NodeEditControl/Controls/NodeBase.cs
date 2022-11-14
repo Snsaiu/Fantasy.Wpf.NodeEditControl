@@ -14,7 +14,7 @@ using System.Xml.Linq;
 
 namespace Fantasy.Wpf.NodeEditControl.Controls
 {
-    public abstract class NodeBase : UserControl
+    public abstract class NodeBase : UserControl, ICanvasElementBase
     {
 
 
@@ -22,6 +22,7 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
 
         protected abstract List<PortBase> GetPorts();
 
+        public NodeCanvasBase Canvas { get; set; }
 
         public abstract OutputData Calculate();
 
@@ -66,6 +67,7 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
                     foreach(PortBase port in this._ports)
                     {
                         port.Node = this;
+                        port.Canvas = this.Canvas;
                     }
                 }
 
@@ -107,30 +109,42 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
 
             };
          
-            this.MouseMove += (s, e) =>
-            {
-                if(e.MouseDevice.LeftButton==System.Windows.Input.MouseButtonState.Pressed)
-                {
+            //this.MouseMove += (s, e) =>
+            //{
+            //    if(e.MouseDevice.LeftButton==System.Windows.Input.MouseButtonState.Pressed)
+            //    {
         
 
-                    var p = e.MouseDevice.GetPosition((UIElement)this.Parent);
-                    InkCanvas.SetLeft(this,p.X-this.Width/2);
-                    InkCanvas.SetTop(this, p.Y-this.Height/2);
-                }
+            //        var p = e.MouseDevice.GetPosition((UIElement)this.Parent);
+            //        InkCanvas.SetLeft(this,p.X-this.Width/2);
+            //        InkCanvas.SetTop(this, p.Y-this.Height/2);
+            //    }
 
-                if(this._ports!=null)
-                {
-                    foreach (var item in this._ports)
-                    {
-                        item.UpdateLinesPosition();
-                    }
-                }
+            //    if(this._ports!=null)
+            //    {
+            //        foreach (var item in this._ports)
+            //        {
+            //            item.UpdateLinesPosition();
+            //        }
+            //    }
           
                 
 
-            };
+            //};
         }
 
+
+        public void UpdateNodePortWithLinesPosition()
+        {
+            if (this._ports != null)
+            {
+                foreach (var item in this._ports)
+                {
+                    item.UpdateLinesPosition();
+                }
+            }
+
+        }
 
 
         public bool IsCalculateNode
