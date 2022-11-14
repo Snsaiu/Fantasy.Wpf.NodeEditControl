@@ -7,6 +7,7 @@ using System.Windows.Controls;
 
 namespace Fantasy.Wpf.NodeEditControl.Controls
 {
+
     public class NodeCanvasBase:UserControl
     {
 

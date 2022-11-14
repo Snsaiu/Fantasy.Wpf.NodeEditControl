@@ -133,8 +133,15 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
             {
                 var line= this.CreateInputLine();
                 this._createNewLine = line;
-                this.AddLine(line);
+                if(this._createNewLine != null)
+                {
+                    this._createNewLine.StartPiont = this.GetSelfPoint();
+
+                }
+
+                //this.AddLine(line);
             }
+            
 
         }
 
