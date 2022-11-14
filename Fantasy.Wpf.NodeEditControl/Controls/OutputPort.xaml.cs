@@ -23,6 +23,10 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
         public OutputPort()
         {
             InitializeComponent();
+            this.output.MouseDown += (s, e) =>
+            {
+                this.CreateLine();
+            };
         }
 
         protected override FrameworkElement GetPortMark()

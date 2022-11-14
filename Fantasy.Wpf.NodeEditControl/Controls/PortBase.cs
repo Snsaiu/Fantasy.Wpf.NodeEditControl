@@ -14,9 +14,22 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
     public abstract class PortBase:UserControl
     {
 
+        /// <summary>
+        /// when click port ,this field will save line instance ,when line connect other port,this field will be cleand
+        /// 
+        /// </summary>
+        private LineBase _createNewLine = null;
+
         public PortBase()
         {
             this.ConnectedLines = new List<LineBase>();
+
+            this.GetPortMark().MouseDown += (s, e) =>
+            {
+
+                this.CreateLine();
+            };
+        
         }
 
         /// <summary>
@@ -103,6 +116,46 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
                 this.ConnectedLines.Remove(line);
             }
         }
+
+        /// <summary>
+        /// when click ,port will create a line 
+        /// </summary>
+        protected void CreateLine()
+        {
+            // determined the port is input type or output type
+            
+            if(this.PortType == PortType.Input)
+            {
+              
+
+            }
+            else if(this.PortType==PortType.Output)
+            {
+                var line= this.CreateInputLine();
+                this._createNewLine = line;
+                this.AddLine(line);
+            }
+
+        }
+
+        /// <summary>
+        /// set the port show line style
+        /// </summary>
+        /// <returns></returns>
+        protected virtual LineBase CreateInputLine()
+        {
+            return new ArrowLine();
+        }
+
+        /// <summary>
+        /// set the port show line style 
+        /// </summary>
+        /// <returns></returns>
+        protected virtual LineBase CreateOutPutLine()
+        {
+            return new ArrowLine();
+        }
+
 
         public List<LineBase> ConnectedLines { get; private set; }
     }
