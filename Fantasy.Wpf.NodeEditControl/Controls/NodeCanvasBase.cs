@@ -26,6 +26,17 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
         public abstract void RemoveLine(LineBase line);
 
 
+        public void ClearSelectElement()
+        {
+            this._selectElement = null;
+        }
+
+        public ICanvasElementBase GetSelectElement()
+        {
+            return this._selectElement;
+        }
+
+
         /// <summary>
         /// 临时
         /// </summary>
@@ -38,8 +49,6 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
         public bool  HitElement(FrameworkElement element,Point position)
         {
 
-          
-           
             while (true)
             {
                 if (element != null)

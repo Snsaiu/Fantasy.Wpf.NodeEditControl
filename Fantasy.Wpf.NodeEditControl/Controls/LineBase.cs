@@ -92,6 +92,31 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
         }
 
 
+        public void Disconnect()
+        {
+            var tailPorts= this.TailNode.GetPorts();
+            if(tailPorts != null )
+            {
+                foreach (var item in tailPorts)
+                {
+                    if(item.ConnectedLines.Contains(this))
+                        item.ConnectedLines.Remove(this);
+                }
+            }
+            var headerPorts=this.HeaderNode.GetPorts();
+            if(headerPorts != null)
+            {
+                foreach(var item in headerPorts)
+                {
+                    if(item.ConnectedLines.Contains(this))
+                        item.ConnectedLines.Remove(this);
+                }
+            }
+
+            this.TailNode = null;
+            this.HeaderNode = null;
+        }
+
         public void ValidateConnectEndPort(DependencyObject control)
         {
          
