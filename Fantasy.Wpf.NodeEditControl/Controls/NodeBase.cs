@@ -1,15 +1,20 @@
 ﻿using Fantasy.Wpf.NodeEditControl.Data;
+using Fantasy.Wpf.NodeEditControl.Helpers;
 
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Configuration;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using System.Xml.Linq;
 
 namespace Fantasy.Wpf.NodeEditControl.Controls
@@ -19,6 +24,16 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
 
 
         private List<PortBase> _ports;
+
+        public virtual string GetGroupName()
+        {
+            return "通用";
+        }
+        public virtual ImageSource GetLogo()
+        {
+            return Tools.LoadBitmapFromResource("Resouces\\Images\\nullLogo.png");
+        }
+
 
         public abstract List<PortBase> GetPorts();
 

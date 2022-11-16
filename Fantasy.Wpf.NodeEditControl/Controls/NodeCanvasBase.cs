@@ -25,6 +25,14 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
 
         public abstract void RemoveLine(LineBase line);
 
+        protected List<Type> Nodes { get; private set; } = new List<Type>();
+
+        public void RegistNode(Type node)
+        {
+            if(this.Nodes.Contains(node)==false)
+                this.Nodes.Add(node);
+        }
+
 
         public void ClearSelectElement()
         {
