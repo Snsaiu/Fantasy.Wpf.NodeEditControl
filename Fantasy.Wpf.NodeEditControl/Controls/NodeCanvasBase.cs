@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Fantasy.Wpf.NodeEditControl.Data;
+using Fantasy.Wpf.NodeEditControl.Helpers;
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,9 +11,14 @@ using System.Windows.Controls;
 using System.Windows.Media;
 
 namespace Fantasy.Wpf.NodeEditControl.Controls
-{
+{ 
+
+  public  delegate void RegistNodeDelegate(RegistNodeItem node);
+
     public abstract class NodeCanvasBase:UserControl
     {
+
+    public event RegistNodeDelegate RegistNodeEvent;
 
         /// <summary>
         /// 被选中
@@ -25,14 +33,22 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
 
         public abstract void RemoveLine(LineBase line);
 
-        protected List<Type> Nodes { get; private set; } = new List<Type>();
+        protected List<RegistNodeItem> Nodes { get; private set; } = new List<RegistNodeItem>();
 
-        public void RegistNode(Type node)
+        public void RegistNode(Type node,string nodeName,ImageSource logo=null,string groupName="通用")
         {
-            if(this.Nodes.Contains(node)==false)
-                this.Nodes.Add(node);
-        }
+        
+            if(this.Nodes.Exists(x=>x.GroupName==groupName&&x.NodeName==nodeName)==false)
+            {
+                if(logo==null)
+                    logo= Tools.LoadBitmapFromResource("Resouces\\Images\\nullLogo.png");
+            var item = new RegistNodeItem { GroupName = groupName, NodeName = nodeName, NodeType = node, NodeLogo = logo };
+                this.Nodes.Add(item);
+            this.RegistNodeEvent?.Invoke(item);
+            }
 
+        }
+        
 
         public void ClearSelectElement()
         {

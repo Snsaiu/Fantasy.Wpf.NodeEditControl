@@ -25,10 +25,6 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
 
         private List<PortBase> _ports;
 
-        public virtual string GetGroupName()
-        {
-            return "通用";
-        }
         public virtual ImageSource GetLogo()
         {
             return Tools.LoadBitmapFromResource("Resouces\\Images\\nullLogo.png");

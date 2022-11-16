@@ -25,6 +25,10 @@ namespace WpfApp3
         public MainWindow()
         {
             InitializeComponent();
+
+            this.canvas.RegistNode(typeof(AdditionNode), "加法");
+            this.canvas.RegistNode(typeof(ConstNode), "常量");
+            this.canvas.RegistNode(typeof(MultiplicationNode), "乘法");
             
             //this.canvas.AddNode(new AdditionNode() { Position = new Point(200, 300),Canvas=this.canvas });
             //this.canvas.AddNode(new AdditionNode() { Position = new Point(300, 400),Canvas=this.canvas });
