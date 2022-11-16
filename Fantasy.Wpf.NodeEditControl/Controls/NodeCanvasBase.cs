@@ -129,7 +129,7 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
         }
 
 
-        public virtual void RealseMouse(Point point)
+        public virtual void ReleaseMouse(Point point)
         {
             if(this._selectElement!=null)
             {

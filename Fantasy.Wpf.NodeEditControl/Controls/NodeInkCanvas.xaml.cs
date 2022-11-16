@@ -180,7 +180,7 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
                 if (e.MouseDevice.LeftButton == MouseButtonState.Released)
                 {
                     var p = e.MouseDevice.GetPosition((UIElement)this.canvas);
-                    this.RealseMouse(p);
+                    this.ReleaseMouse(p);
                 }
             };
         }
