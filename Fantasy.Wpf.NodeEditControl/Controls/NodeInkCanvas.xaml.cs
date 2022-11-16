@@ -17,6 +17,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Xml.Linq;
 
+using static System.Formats.Asn1.AsnWriter;
+
 namespace Fantasy.Wpf.NodeEditControl.Controls
 {
     /// <summary>
@@ -27,16 +29,33 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
 
         private Point _dragStartPoint;
 
-        private double _scaleLevel = 1;
 
-        private ScaleTransform _totalScale = new ScaleTransform();
 
         private bool _treeItemIsDrag = false;
+
+
+        private Point _canvasStartPoint;
 
         private List<TreeItem> _nodes = new List<TreeItem>();
         public NodeInkCanvas()
         {
             InitializeComponent();
+            
+            this.canvas.RenderTransform = new TransformGroup();
+
+            this.Loaded += (s, e) =>
+            {
+                TransformGroup tg = this.canvas.RenderTransform as TransformGroup;
+                if (tg != null)
+                {
+                    Window window = Window.GetWindow(this);
+                    Point p = this.canvasBorder.TransformToAncestor(window).Transform(new Point(0, 0));
+                    tg.Children.Add(new ScaleTransform(100, 100, p.X + this.canvasBorder.ActualWidth / 2, p.Y + this.canvasBorder.ActualHeight / 2));
+
+                }
+            };
+  
+
 
             this.RegistNodeEvent += (node) =>
             {
@@ -170,6 +189,11 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
                     }, new PointHitTestParameters(p));
 
                 }
+                else if(e.MouseDevice.MiddleButton==MouseButtonState.Pressed)
+                {
+                    this._canvasStartPoint = e.GetPosition(this.canvasBorder);
+                }
+            
             };
             this.canvas.MouseMove += (s, e) =>
             {
@@ -177,6 +201,17 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
                 {
                     var p = e.MouseDevice.GetPosition((UIElement)this.canvas);
                     this.Move(p);
+                }
+                else if(e.MouseDevice.MiddleButton==MouseButtonState.Pressed)
+                {
+                    Point currentPoint = e.GetPosition(canvasBorder);
+                    Vector calculatePoint = currentPoint - this._canvasStartPoint;
+                    TransformGroup tg = this.canvas.RenderTransform as TransformGroup;
+                    if(tg!=null)
+                    {
+                        tg.Children.Add(new TranslateTransform(calculatePoint.X,calculatePoint.Y));
+                        this._canvasStartPoint=currentPoint;
+                    }
                 }
             };
 
@@ -191,31 +226,25 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
 
             this.canvas.MouseWheel += (s, e) =>
             {
-                if (e.Delta > 0)
+
+                Point p=e.GetPosition(this.canvasBorder);
+
+                double scale = ((double)e.Delta) / 1000.0 + 1.0;
+                TransformGroup tg=this.canvas.RenderTransform as TransformGroup; 
+                 if(tg!=null)
                 {
-                    _scaleLevel *= 1.08;
-                }
-                else
-                {
-                    _scaleLevel /= 1.08;
+                    tg.Children.Add(new ScaleTransform(scale, scale, p.X,p.Y));
                 }
 
-                adjustGraph();
+             
 
             };
 
+
+
         }
 
-        private void adjustGraph()
-        {
-            _totalScale.ScaleX = _scaleLevel;
-            _totalScale.ScaleY = _scaleLevel;
-            _totalScale.CenterX = Mouse.GetPosition(this).X;
-            _totalScale.CenterY = Mouse.GetPosition(this).Y;
-            TransformGroup tfGroup = new TransformGroup();
-            tfGroup.Children.Add(_totalScale);
-            this.canvas.RenderTransform = tfGroup;
-        }
+
 
         public override void AddNode(NodeBase node)
         {

@@ -33,6 +33,13 @@
             </TreeView.ItemTemplate>
         </TreeView>
 
-        <InkCanvas AllowDrop="True" Background="#3f3f3f"  EditingMode="None" Grid.Column="1" Name="canvas"></InkCanvas> 
+        <Border ClipToBounds="True" Grid.Column="1" x:Name="canvasBorder">
+            <InkCanvas AllowDrop="True" Background="#3f3f3f"   EditingMode="None"  Name="canvas">
+                <InkCanvas.LayoutTransform>
+                    <ScaleTransform ScaleX="0.01" ScaleY="0.01"/>
+                </InkCanvas.LayoutTransform>
+            </InkCanvas>
+        </Border>
+       
     </Grid>
 </local:NodeCanvasBase>
