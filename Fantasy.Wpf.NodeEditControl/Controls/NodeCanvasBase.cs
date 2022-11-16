@@ -139,7 +139,7 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
                 {
                      if(p.PortType==Enums.PortType.Output)
                     {
-                        VisualTreeHelper.HitTest((UIElement)this.Parent, null, resultCallback: (x) =>
+                        VisualTreeHelper.HitTest((UIElement)this, null, resultCallback: (x) =>
                         {
                             if (x.VisualHit != null)
                             {

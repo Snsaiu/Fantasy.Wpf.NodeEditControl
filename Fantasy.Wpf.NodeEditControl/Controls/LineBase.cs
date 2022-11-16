@@ -125,7 +125,7 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
                 while (true)
                 {
                     if(uc != null)
-                    {
+                     {
                         if(uc is InputPort)
                         {
                             port=uc as InputPort;

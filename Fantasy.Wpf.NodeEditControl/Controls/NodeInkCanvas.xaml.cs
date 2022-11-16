@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -25,6 +26,10 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
     {
 
         private Point _dragStartPoint;
+
+        private double _scaleLevel = 1;
+
+        private ScaleTransform _totalScale = new ScaleTransform();
 
         private bool _treeItemIsDrag = false;
 
@@ -179,10 +184,37 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
             {
                 if (e.MouseDevice.LeftButton == MouseButtonState.Released)
                 {
-                    var p = e.MouseDevice.GetPosition((UIElement)this.canvas);
+                    var p = e.GetPosition((UIElement)this);
                     this.ReleaseMouse(p);
                 }
             };
+
+            this.canvas.MouseWheel += (s, e) =>
+            {
+                if (e.Delta > 0)
+                {
+                    _scaleLevel *= 1.08;
+                }
+                else
+                {
+                    _scaleLevel /= 1.08;
+                }
+
+                adjustGraph();
+
+            };
+
+        }
+
+        private void adjustGraph()
+        {
+            _totalScale.ScaleX = _scaleLevel;
+            _totalScale.ScaleY = _scaleLevel;
+            _totalScale.CenterX = Mouse.GetPosition(this).X;
+            _totalScale.CenterY = Mouse.GetPosition(this).Y;
+            TransformGroup tfGroup = new TransformGroup();
+            tfGroup.Children.Add(_totalScale);
+            this.canvas.RenderTransform = tfGroup;
         }
 
         public override void AddNode(NodeBase node)

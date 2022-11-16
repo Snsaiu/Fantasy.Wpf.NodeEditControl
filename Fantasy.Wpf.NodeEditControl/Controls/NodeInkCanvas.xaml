@@ -32,7 +32,7 @@
                 </HierarchicalDataTemplate>
             </TreeView.ItemTemplate>
         </TreeView>
-        
-        <InkCanvas AllowDrop="True" EditingMode="None" Grid.Column="1" Name="canvas"></InkCanvas> 
+
+        <InkCanvas AllowDrop="True" Background="#3f3f3f"  EditingMode="None" Grid.Column="1" Name="canvas"></InkCanvas> 
     </Grid>
 </local:NodeCanvasBase>
