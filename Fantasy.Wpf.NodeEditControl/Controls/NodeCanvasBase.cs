@@ -27,11 +27,11 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
 
         public abstract void AddNode(NodeBase node, Point position);
 
-        public abstract void RemoveNode(NodeBase node);
+        protected abstract void RemoveNodeElement(NodeBase node);
 
         public abstract void CreateLine(LineBase line);
 
-        public abstract void RemoveLine(LineBase line);
+        protected abstract void RemoveLineElement(LineBase line);
 
         protected List<RegistNodeItem> Nodes { get; private set; } = new List<RegistNodeItem>();
 
@@ -66,11 +66,31 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
         /// </summary>
         private LineBase _newLine = null;
 
+
+
+        protected bool HitElement(FrameworkElement element,Point point)
+        {
+            VisualTreeHelper.HitTest(element, null, resultCallback: (x) =>
+            {
+                if (x.VisualHit != null)
+                {
+                    bool hitRes = this.hitTest((FrameworkElement)x.VisualHit, point);
+                    if (hitRes == true)
+                    {
+                        return HitTestResultBehavior.Stop;
+                    }
+                }
+                return HitTestResultBehavior.Continue;
+            }, new PointHitTestParameters(point));
+
+            return this._selectElement != null ? true : false;
+        }
+
         /// <summary>
         /// 当鼠标点击的时候选择的控件
         /// </summary>
         /// <param name="element"></param>
-        public bool  HitElement(FrameworkElement element,Point position)
+       private bool  hitTest(FrameworkElement element,Point position)
         {
 
             while (true)
@@ -202,6 +222,54 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
             }
 
            
+        }
+
+        /// <summary>
+        /// 移除节点
+        /// </summary>
+        /// <param name="node"></param>
+        public  void RemoveNode(NodeBase node)
+        {
+            this.RemoveNodeElement(node);
+            foreach (var item in node.GetPorts())
+            {
+                for (int i = 0; i < item.ConnectedLines.Count; i++)
+                {
+
+
+
+                    foreach (var tailport in item.ConnectedLines[i].TailNode.GetPorts())
+                    {
+                        if (tailport.ConnectedLines.Contains(item.ConnectedLines[i]))
+                        {
+                            tailport.RemoveLine(item.ConnectedLines[i]);
+                        }
+                    }
+                    item.ConnectedLines[i].TailNode = null;
+
+                    foreach (var headerport in item.ConnectedLines[i].HeaderNode.GetPorts())
+                    {
+                        if (headerport.ConnectedLines.Contains(item.ConnectedLines[i]))
+                        {
+                            headerport.RemoveLine(item.ConnectedLines[i]);
+                        }
+                    }
+
+                    item.ConnectedLines[i].HeaderNode = null;
+                    this.RemoveLineElement(item.ConnectedLines[i]);
+
+                }
+                item.ConnectedLines.Clear();
+            }
+            this.ClearSelectElement();
+        }
+
+
+        public void RemoveLine(LineBase line)
+        {
+            line.Disconnect();
+            this.RemoveLineElement(line);
+            this.ClearSelectElement();
         }
     }
 }

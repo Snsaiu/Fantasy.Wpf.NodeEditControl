@@ -139,27 +139,14 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
                 {
 
                     var p = e.MouseDevice.GetPosition((UIElement)this.canvas);
-                    VisualTreeHelper.HitTest(this.canvas, null, resultCallback: (x) =>
-                    {
-                        if (x.VisualHit != null)
-                        {
-                            bool hitRes = this.HitElement((FrameworkElement)x.VisualHit, p);
-                            if (hitRes == true)
-                            {
-                                return HitTestResultBehavior.Stop;
-                            }
-                        }
-                        return HitTestResultBehavior.Continue;
-                    }, new PointHitTestParameters(p));
+                        this.HitElement(this.canvas, p);
+
                 }
                 else if(e.MouseDevice.RightButton==MouseButtonState.Pressed)
                 {
                     var p = e.MouseDevice.GetPosition((UIElement)this.canvas);
-                    VisualTreeHelper.HitTest(this.canvas, null, resultCallback: (x) =>
-                    {
-                        if (x.VisualHit != null)
-                        {
-                            bool hitRes = this.HitElement((FrameworkElement)x.VisualHit, p);
+            
+                            bool hitRes = this.HitElement(this.canvas, p);
                             if (hitRes == true)
                             {
                                 if(this.GetSelectElement()!=null)
@@ -171,10 +158,9 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
                                         deleteItem.Header = "断开";
                                         deleteItem.Click += (x, xx) =>
                                         {
-                                            line.Disconnect();
+                                    
                                             this.RemoveLine(line);
-                                            this.ClearSelectElement();
-
+                                            
                                         };
                                         cm.Items.Add(deleteItem);
                                        line.ContextMenu = cm;
@@ -189,21 +175,15 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
 
                                             this.RemoveNode(node);
 
-                                            //line.Disconnect();
-                                            //this.RemoveLine(line);
-                                            //this.ClearSelectElement();
-
                                         };
                                         cm.Items.Add(deleteItem);
                                         node.ContextMenu = cm;
                                     }
                                 }
 
-                                return HitTestResultBehavior.Stop;
+                         
                             }
-                        }
-                        return HitTestResultBehavior.Continue;
-                    }, new PointHitTestParameters(p));
+             
 
                 }
                 else if(e.MouseDevice.MiddleButton==MouseButtonState.Pressed)
@@ -275,44 +255,15 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
             this.canvas.Children.Add(line);
         }
 
-        public override void RemoveLine(LineBase line)
+        protected override void RemoveLineElement(LineBase line)
         {
             this.canvas.Children.Remove(line);
         }
 
-        public override void RemoveNode(NodeBase node)
+        protected override void RemoveNodeElement(NodeBase node)
         {
             this.canvas.Children.Remove(node);
-            foreach (var item in node.GetPorts())
-            {
-                for (int i=0; i<item.ConnectedLines.Count;i++)
-                {
-                    
-
-              
-                    foreach (var tailport in item.ConnectedLines[i].TailNode.GetPorts())
-                    {
-                        if(tailport.ConnectedLines.Contains(item.ConnectedLines[i]))
-                        {
-                            tailport.RemoveLine(item.ConnectedLines[i]);
-                        }
-                    }
-                    item.ConnectedLines[i].TailNode = null;
-                    
-                    foreach (var headerport in item.ConnectedLines[i].HeaderNode.GetPorts())
-                    {
-                        if (headerport.ConnectedLines.Contains(item.ConnectedLines[i]))
-                        {
-                            headerport.RemoveLine(item.ConnectedLines[i]);
-                        }
-                    }
-
-                    item.ConnectedLines[i].HeaderNode = null;
-                    this.canvas.Children.Remove(item.ConnectedLines[i]);
-                   
-                }
-                item.ConnectedLines.Clear();
-            }
         }
+
     }
 }
