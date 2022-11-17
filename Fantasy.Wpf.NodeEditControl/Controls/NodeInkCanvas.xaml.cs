@@ -124,9 +124,8 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
                 if(data.GetDataPresent(typeof(RegistNodeItem))) {
                 RegistNodeItem info=data.GetData(typeof(RegistNodeItem)) as RegistNodeItem;
                     var instance= Activator.CreateInstance(info.NodeType) as NodeBase;
-                    this.AddNode(instance);
-                    instance.Canvas = this;
-                    instance.Position=e.GetPosition(this.canvas);
+                    this.AddNode(instance, e.GetPosition(this.canvas));
+                  
                 }
 
             };
@@ -179,6 +178,24 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
                                         };
                                         cm.Items.Add(deleteItem);
                                        line.ContextMenu = cm;
+                                    }
+                                    else if(this.GetSelectElement() is NodeBase node)
+                                    {
+                                        ContextMenu cm = new ContextMenu();
+                                        MenuItem deleteItem = new MenuItem();
+                                        deleteItem.Header = "删除";
+                                        deleteItem.Click += (x, xx) =>
+                                        {
+
+                                            this.RemoveNode(node);
+
+                                            //line.Disconnect();
+                                            //this.RemoveLine(line);
+                                            //this.ClearSelectElement();
+
+                                        };
+                                        cm.Items.Add(deleteItem);
+                                        node.ContextMenu = cm;
                                     }
                                 }
 
@@ -246,9 +263,11 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
 
 
 
-        public override void AddNode(NodeBase node)
+        public override void AddNode(NodeBase node,Point position)
         {
-           this.canvas.Children.Add(node);
+            node.Canvas = this;
+            node.Position =position;
+            this.canvas.Children.Add(node);
         }
 
         public override void CreateLine(LineBase line)
@@ -264,6 +283,36 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
         public override void RemoveNode(NodeBase node)
         {
             this.canvas.Children.Remove(node);
+            foreach (var item in node.GetPorts())
+            {
+                for (int i=0; i<item.ConnectedLines.Count;i++)
+                {
+                    
+
+              
+                    foreach (var tailport in item.ConnectedLines[i].TailNode.GetPorts())
+                    {
+                        if(tailport.ConnectedLines.Contains(item.ConnectedLines[i]))
+                        {
+                            tailport.RemoveLine(item.ConnectedLines[i]);
+                        }
+                    }
+                    item.ConnectedLines[i].TailNode = null;
+                    
+                    foreach (var headerport in item.ConnectedLines[i].HeaderNode.GetPorts())
+                    {
+                        if (headerport.ConnectedLines.Contains(item.ConnectedLines[i]))
+                        {
+                            headerport.RemoveLine(item.ConnectedLines[i]);
+                        }
+                    }
+
+                    item.ConnectedLines[i].HeaderNode = null;
+                    this.canvas.Children.Remove(item.ConnectedLines[i]);
+                   
+                }
+                item.ConnectedLines.Clear();
+            }
         }
     }
 }

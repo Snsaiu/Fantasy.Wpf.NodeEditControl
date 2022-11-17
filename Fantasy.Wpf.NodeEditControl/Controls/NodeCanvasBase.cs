@@ -25,7 +25,7 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
         /// </summary>
         private ICanvasElementBase _selectElement = null;
 
-        public abstract void AddNode(NodeBase node);
+        public abstract void AddNode(NodeBase node, Point position);
 
         public abstract void RemoveNode(NodeBase node);
 
