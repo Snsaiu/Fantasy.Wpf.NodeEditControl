@@ -94,6 +94,9 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
 
         public void Disconnect()
         {
+            if (this.TailNode == null)
+                return;
+
             var tailPorts= this.TailNode.GetPorts();
             if(tailPorts != null )
             {
