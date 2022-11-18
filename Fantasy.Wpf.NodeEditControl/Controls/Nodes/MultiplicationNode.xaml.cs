@@ -97,7 +97,8 @@ namespace Fantasy.Wpf.NodeEditControl.Controls.Nodes
 
         public override string GetNodeSummary()
         {
-            throw new NotImplementedException();
+            string content = "两个数相乘";
+            return content;
         }
     }
 }

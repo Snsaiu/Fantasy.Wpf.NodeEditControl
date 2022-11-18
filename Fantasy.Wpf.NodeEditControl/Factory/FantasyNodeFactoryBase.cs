@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Fantasy.Wpf.NodeEditControl.Controls.Dialogs;
 
 namespace Fantasy.Wpf.NodeEditControl.Factory
 {
@@ -15,6 +16,15 @@ namespace Fantasy.Wpf.NodeEditControl.Factory
             return new ArrowLine();
         }
 
+        public virtual NodeContainerBase SetNodeContainerStyle()
+        {
+            return new NodeContainer();
+        }
+
+        public virtual NodeInfoDialogBase SetNodeInfoDialogStyle()
+        {
+            return new DefaultNodeInfoDialog();
+        }
        
     }
 }

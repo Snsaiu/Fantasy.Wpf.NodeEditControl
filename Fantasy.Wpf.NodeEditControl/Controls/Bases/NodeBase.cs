@@ -54,7 +54,7 @@ namespace Fantasy.Wpf.NodeEditControl.Controls.Bases
 
         protected virtual NodeContainerBase CreateNodeContainerStyle()
         {
-            return new NodeContainer();
+            return  FantasyNodeGlobalSetting.ConfigFantasy.SetNodeContainerStyle(); 
         }
 
 
@@ -99,6 +99,15 @@ namespace Fantasy.Wpf.NodeEditControl.Controls.Bases
                 nc.IsCalculateNode(IsCalculateNode);
                 nc.SetNodeSize(GetNodeSize());
 
+                nc.ShowSummaryEvent += () =>
+                {
+
+                    NodeInfoDialogBase nodeInfoDialogBase =
+                        FantasyNodeGlobalSetting.ConfigFantasy.SetNodeInfoDialogStyle();
+                    nodeInfoDialogBase.ShowInTaskbar = false;
+                    nodeInfoDialogBase.InitShow(GetNodeName(),this.GetLogo(),this.GetNodeSummary());
+                    nodeInfoDialogBase.ShowDialog();
+                };
 
                 nc.CalculateEvent += () =>
                 {

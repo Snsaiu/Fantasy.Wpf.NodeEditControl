@@ -32,7 +32,9 @@ namespace Fantasy.Wpf.NodeEditControl.Controls.Nodes
 
         public override string GetNodeSummary()
         {
-            throw new NotImplementedException();
+            string content = "两个值相加，如果输入节点是string类型，那么将会把所有的输入节点全部转换为string，最终结果是字符串" +
+                             "的拼接";
+            return content;
         }
 
         protected override string GetNodeName()
