@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
+using Fantasy.Wpf.NodeEditControl.Controls.Bases;
 
 namespace Fantasy.Wpf.NodeEditControl.Controls.Lines
 {

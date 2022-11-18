@@ -1,4 +1,5 @@
-﻿using Fantasy.Wpf.NodeEditControl.Data;
+﻿using Fantasy.Wpf.NodeEditControl.Controls.Bases;
+using Fantasy.Wpf.NodeEditControl.Data;
 using Fantasy.Wpf.NodeEditControl.Helpers;
 
 using System;
@@ -27,6 +28,11 @@ namespace Fantasy.Wpf.NodeEditControl.Controls.Nodes
         public AdditionNode()
         {
             InitializeComponent();
+        }
+
+        public override string GetNodeSummary()
+        {
+            throw new NotImplementedException();
         }
 
         protected override string GetNodeName()

@@ -1,4 +1,4 @@
-﻿<local:LineBase  xmlns:local="clr-namespace:Fantasy.Wpf.NodeEditControl.Controls"
+﻿<local:LineBase  xmlns:local="clr-namespace:Fantasy.Wpf.NodeEditControl.Controls.Bases"
                  x:Class="Fantasy.Wpf.NodeEditControl.Controls.ArrowLine"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"

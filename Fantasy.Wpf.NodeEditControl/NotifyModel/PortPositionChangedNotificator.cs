@@ -1,5 +1,4 @@
-﻿using Fantasy.Wpf.NodeEditControl.Controls;
-
+﻿using Fantasy.Wpf.NodeEditControl.Controls.Bases;
 using System;
 using System.Collections.Generic;
 using System.Linq;

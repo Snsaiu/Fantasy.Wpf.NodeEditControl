@@ -1,4 +1,5 @@
-﻿using Fantasy.Wpf.NodeEditControl.Data;
+﻿using Fantasy.Wpf.NodeEditControl.Controls.Bases;
+using Fantasy.Wpf.NodeEditControl.Data;
 
 using System;
 using System.Collections.Generic;
@@ -80,6 +81,12 @@ namespace Fantasy.Wpf.NodeEditControl.Controls.Nodes
         public override List<Type> SupportOutputTypes()
         {
             return new List<Type> { typeof(string), typeof(int), typeof(double), typeof(float), typeof(decimal) };
+        }
+
+        public override string GetNodeSummary()
+        {
+            string content = "一个固定不变的值，该至可以是文本和数字";
+            return content;
         }
     }
 }

@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fantasy.Wpf.NodeEditControl.Controls
+namespace Fantasy.Wpf.NodeEditControl.Controls.Bases
 {
     public interface ICanvasElementBase
     {
-         NodeCanvasBase Canvas { get; set; }
+        NodeCanvasBase Canvas { get; set; }
 
-        
+
     }
 }

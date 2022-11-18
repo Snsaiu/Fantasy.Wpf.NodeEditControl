@@ -1,4 +1,5 @@
-﻿using Fantasy.Wpf.NodeEditControl.Data;
+﻿using Fantasy.Wpf.NodeEditControl.Controls.Bases;
+using Fantasy.Wpf.NodeEditControl.Data;
 using Fantasy.Wpf.NodeEditControl.Helpers;
 
 using System;
@@ -90,7 +91,13 @@ namespace Fantasy.Wpf.NodeEditControl.Controls.Nodes
 
         public override List<Type> SupportOutputTypes()
         {
-            return new List<Type> {typeof(int), typeof(double), typeof(float), typeof(decimal) };
+            return new List<Type> { typeof(int), typeof(double), typeof(float), typeof(decimal) };
+
+        }
+
+        public override string GetNodeSummary()
+        {
+            throw new NotImplementedException();
         }
     }
 }

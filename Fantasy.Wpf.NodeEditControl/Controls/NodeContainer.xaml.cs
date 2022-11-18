@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Xml.Linq;
+using Fantasy.Wpf.NodeEditControl.Controls.Bases;
 
 namespace Fantasy.Wpf.NodeEditControl.Controls
 {
@@ -36,15 +37,30 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
             {
                 this.CalculateEvent?.Invoke();
             };
+            this.infoBtn.Click += (s, e) =>
+            {
+                this.ShowSummaryEvent?.Invoke();
+            };
           
         }
 
         public override event CalculateDelegate CalculateEvent;
+        public override event ShowSummaryDelegate ShowSummaryEvent;
 
         public override void IsCalculateNode(bool isCalculateNode)
         {
             this.refreshBtn.Visibility = isCalculateNode ? Visibility.Visible : Visibility.Collapsed;
         
+        }
+
+        public override void DefaultStyle()
+        {
+            this.border.BorderBrush=new SolidColorBrush(Colors.BlanchedAlmond);
+        }
+
+        public override void SelectedStyle()
+        {
+            this.border.BorderBrush = new SolidColorBrush(Colors.OrangeRed);
         }
 
         public override void SetContent(FrameworkElement content)
