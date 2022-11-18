@@ -1,4 +1,4 @@
-﻿<controls:NodeBase 
+﻿<bases:NodeBase 
     xmlns:controls="clr-namespace:Fantasy.Wpf.NodeEditControl.Controls" x:Class="Fantasy.Wpf.NodeEditControl.Controls.Nodes.ConstNode"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -7,6 +7,7 @@
     IsCalculateNode="False"
     
              xmlns:local="clr-namespace:Fantasy.Wpf.NodeEditControl.Controls.Nodes"
+             xmlns:bases="clr-namespace:Fantasy.Wpf.NodeEditControl.Controls.Bases"
              mc:Ignorable="d" 
             >
     <Grid Background="Gray">
@@ -30,4 +31,4 @@
     </Grid>
 
 
-</controls:NodeBase>
+</bases:NodeBase>

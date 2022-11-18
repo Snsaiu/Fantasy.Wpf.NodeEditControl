@@ -37,6 +37,11 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
             return "TEST";
         }
 
+        public override string GetNodeSummary()
+        {
+            throw new NotImplementedException();
+        }
+
         protected override Size GetNodeSize()
         {
             return  new Size(400, 300);
