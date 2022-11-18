@@ -32,7 +32,7 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
 
                 this.GetPortMark().MouseDown += (s, e) =>
                 {
-                    if(e.MiddleButton==MouseButtonState.Pressed)
+                    if(e.LeftButton==MouseButtonState.Pressed)
                         this.CreateLine();
                 };
 
