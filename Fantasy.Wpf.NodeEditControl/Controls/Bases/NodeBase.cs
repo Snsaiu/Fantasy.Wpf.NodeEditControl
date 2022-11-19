@@ -75,18 +75,23 @@ namespace Fantasy.Wpf.NodeEditControl.Controls.Bases
 
         public NodeCanvasBase Canvas { get; set; }
 
+        /// <summary>
+        /// setting panel saveed data
+        /// </summary>
+        private object _settingDataValue = null;
+
         public  OutputData Calculate()
         {
             if(this.FreezeCalculate)
             {
                 if(this._freezeData == null)
                 {
-                    this._freezeData = this.CalculateImpl();
+                    this._freezeData = this.CalculateImpl(this._settingDataValue);
                 }
             }
             else
             {
-                this._freezeData= this.CalculateImpl();
+                this._freezeData= this.CalculateImpl(this._settingDataValue);
             }
      
             return this._freezeData;    
@@ -97,7 +102,7 @@ namespace Fantasy.Wpf.NodeEditControl.Controls.Bases
         /// 计算
         /// </summary>
         /// <returns></returns>
-        protected abstract OutputData CalculateImpl();
+        protected abstract OutputData CalculateImpl(object data);
 
         protected abstract Size GetNodeSize();
 
@@ -189,6 +194,7 @@ namespace Fantasy.Wpf.NodeEditControl.Controls.Bases
                 {
                     this.FreezeCalculate = state;
                 };
+                
                 nc.CalculateEvent += () =>
                 {
 
@@ -202,11 +208,23 @@ namespace Fantasy.Wpf.NodeEditControl.Controls.Bases
                     {
                         throw new NullReferenceException();
                     }
-
-
-
                 };
 
+                nc.SetSettingPanelEvent += () =>
+                {
+                    SettingDialogBase settingDialog = FantasyNodeGlobalSetting.ConfigFantasy.SetSettingDialogStyle();
+                    settingDialog.SetSettingBaseInfo(this.GetNodeName(),this.GetLogo());
+                    var settingContent = this.SetSettingContent();
+                    settingDialog.SetContent(settingContent);
+                    settingContent.UpdateEvent += (data) =>
+                    {
+                        this._settingDataValue = data;
+                        this.Calculate();
+
+                    };
+                    settingDialog.Show();
+
+                };
 
 
                 nc.SetContent(sonChild);
@@ -232,28 +250,6 @@ namespace Fantasy.Wpf.NodeEditControl.Controls.Bases
 
             };
 
-            //this.MouseMove += (s, e) =>
-            //{
-            //    if(e.MouseDevice.LeftButton==System.Windows.Input.MouseButtonState.Pressed)
-            //    {
-
-
-            //        var p = e.MouseDevice.GetPosition((UIElement)this.Parent);
-            //        InkCanvas.SetLeft(this,p.X-this.Width/2);
-            //        InkCanvas.SetTop(this, p.Y-this.Height/2);
-            //    }
-
-            //    if(this._ports!=null)
-            //    {
-            //        foreach (var item in this._ports)
-            //        {
-            //            item.UpdateLinesPosition();
-            //        }
-            //    }
-
-
-
-            //};
         }
 
 
@@ -266,8 +262,13 @@ namespace Fantasy.Wpf.NodeEditControl.Controls.Bases
                     item.UpdateLinesPosition();
                 }
             }
-
         }
+
+        /// <summary>
+        ///  set setting panel content
+        /// </summary>
+        /// <returns></returns>
+        public abstract SettingPanelBase SetSettingContent();
 
 
         public bool IsCalculateNode

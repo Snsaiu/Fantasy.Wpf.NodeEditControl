@@ -10,7 +10,14 @@
   <ItemGroup>
     <None Remove="Images\info.png" />
     <None Remove="Images\refresh.png" />
+    <None Remove="Images\setting.png" />
     <None Remove="Resouces\Images\nullLogo.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\setting.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 
   <ItemGroup>

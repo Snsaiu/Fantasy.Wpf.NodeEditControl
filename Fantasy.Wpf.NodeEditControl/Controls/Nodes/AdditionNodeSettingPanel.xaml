@@ -1,0 +1,17 @@
+﻿<bases:SettingPanelBase x:Class="Fantasy.Wpf.NodeEditControl.Controls.Nodes.AdditionNodeSettingPanel"
+                  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+                  xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+                  xmlns:local="clr-namespace:Fantasy.Wpf.NodeEditControl.Controls.Nodes"
+                  xmlns:bases="clr-namespace:Fantasy.Wpf.NodeEditControl.Controls.Bases"
+                  mc:Ignorable="d" 
+                 >
+
+    
+        <StackPanel Orientation="Horizontal" Grid.Row="2">
+            <Label>输入三:</Label>
+            <TextBox MinWidth="300" TextWrapping="Wrap" Name="inputTxt"></TextBox>
+        </StackPanel>
+ 
+</bases:SettingPanelBase>
