@@ -22,6 +22,7 @@ namespace Fantasy.Wpf.NodeEditControl.Controls.Bases
     public abstract class NodeBase : UserControl, ICanvasElementBase
     {
 
+        
 
         private List<PortBase> _ports;
 
@@ -35,7 +36,29 @@ namespace Fantasy.Wpf.NodeEditControl.Controls.Bases
 
         public NodeCanvasBase Canvas { get; set; }
 
-        public abstract OutputData Calculate();
+        public  OutputData Calculate()
+        {
+            if(this.FreezeCalculate)
+            {
+                if(this._freezeData == null)
+                {
+                    this._freezeData = this.CalculateImpl();
+                }
+            }
+            else
+            {
+                this._freezeData= this.CalculateImpl();
+            }
+     
+            return this._freezeData;    
+
+        }
+
+        /// <summary>
+        /// 计算
+        /// </summary>
+        /// <returns></returns>
+        protected abstract OutputData CalculateImpl();
 
         protected abstract Size GetNodeSize();
 
@@ -68,6 +91,22 @@ namespace Fantasy.Wpf.NodeEditControl.Controls.Bases
         public abstract List<Type> SupportOutputTypes();
 
 
+        private OutputData _freezeData = null;
+
+
+        public bool FreezeCalculate
+        {
+            get { return (bool)GetValue(FreezeCalculateProperty); }
+            set { SetValue(FreezeCalculateProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for FreezeCalculate.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty FreezeCalculateProperty =
+            DependencyProperty.Register("FreezeCalculate", typeof(bool), typeof(NodeBase), new PropertyMetadata(false));
+
+
+
+
         public NodeBase()
         {
 
@@ -94,7 +133,6 @@ namespace Fantasy.Wpf.NodeEditControl.Controls.Bases
                 if (nc == null)
                     throw new NullReferenceException();
 
-
                 nc.SetNodeName(GetNodeName());
                 nc.IsCalculateNode(IsCalculateNode);
                 nc.SetNodeSize(GetNodeSize());
@@ -108,10 +146,14 @@ namespace Fantasy.Wpf.NodeEditControl.Controls.Bases
                     nodeInfoDialogBase.InitShow(GetNodeName(),this.GetLogo(),this.GetNodeSummary());
                     nodeInfoDialogBase.ShowDialog();
                 };
-
+                nc.SetFreezeCalculateStateEvent += (state) =>
+                {
+                    this.FreezeCalculate = state;
+                };
                 nc.CalculateEvent += () =>
                 {
-                    var data = Calculate();
+
+                    var data = this.Calculate();
                     var outputport = _ports.FirstOrDefault(x => x.PortType == Enums.PortType.Output);
                     if (outputport != null)
                     {
@@ -121,6 +163,9 @@ namespace Fantasy.Wpf.NodeEditControl.Controls.Bases
                     {
                         throw new NullReferenceException();
                     }
+
+
+
                 };
 
 

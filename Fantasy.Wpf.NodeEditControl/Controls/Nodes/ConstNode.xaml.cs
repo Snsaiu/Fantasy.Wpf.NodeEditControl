@@ -37,7 +37,7 @@ namespace Fantasy.Wpf.NodeEditControl.Controls.Nodes
 
             };
         }
-        public override OutputData Calculate()
+        protected override OutputData CalculateImpl()
         {
             string content = this.inputTxt.Text;
             var od = new OutputData();

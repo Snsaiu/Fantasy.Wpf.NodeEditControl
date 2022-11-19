@@ -16,6 +16,9 @@ namespace Fantasy.Wpf.NodeEditControl.Controls.Bases
     /// </summary>
     public delegate void ShowSummaryDelegate();
 
+
+    public delegate void SetFreezeCalculateStateDelegate(bool state);
+
     public abstract class NodeContainerBase : UserControl
     {
 
@@ -23,6 +26,12 @@ namespace Fantasy.Wpf.NodeEditControl.Controls.Bases
 
 
         public abstract event ShowSummaryDelegate ShowSummaryEvent;
+
+        /// <summary>
+        /// set freeze calculate state ,if set true ,the node state will be freeze otherwise not
+        /// </summary>
+        public abstract event SetFreezeCalculateStateDelegate SetFreezeCalculateStateEvent;
+
 
         public NodeContainerBase()
         {
@@ -44,6 +53,8 @@ namespace Fantasy.Wpf.NodeEditControl.Controls.Bases
         {
 
         }
+
+       
 
 
         public abstract void SetNodeName(string name);

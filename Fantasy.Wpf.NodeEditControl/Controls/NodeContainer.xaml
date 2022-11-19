@@ -33,11 +33,17 @@
             </Grid.RowDefinitions>
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition></ColumnDefinition>
-                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <TextBlock Margin="20,0" VerticalAlignment="Center" x:Name="title" Foreground="Black"></TextBlock>
                 <StackPanel Margin="10,2" Grid.Column="1" HorizontalAlignment="Right" Orientation="Horizontal" Background="Gray">
+
+                    
+                        
+                        <CheckBox Name="freezeCbox"  VerticalAlignment="Center" IsChecked="False" Content="FV" ></CheckBox>
+                       
+                 
                     <Button Width="20" x:Name="refreshBtn" Margin="5,0" BorderThickness="0">
                         <Button.Background>
                             <ImageBrush Stretch="Uniform" ImageSource="/Fantasy.Wpf.NodeEditControl;component/Images/refresh.png"/>
@@ -48,7 +54,6 @@
                         <Button.Background>
                             <ImageBrush  Stretch="Uniform" ImageSource="/Fantasy.Wpf.NodeEditControl;component/Images/info.png"/>
                         </Button.Background>
-
                     </Button>
                 </StackPanel>
             </Grid>

@@ -67,7 +67,7 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
             throw new NotImplementedException();
         }
 
-        public override OutputData Calculate()
+        protected override OutputData CalculateImpl()
         {
             throw new NotImplementedException();
         }

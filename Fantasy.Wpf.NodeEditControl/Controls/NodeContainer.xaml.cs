@@ -41,11 +41,21 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
             {
                 this.ShowSummaryEvent?.Invoke();
             };
+
+            this.freezeCbox.Checked += (s, e) =>
+            {
+                this.SetFreezeCalculateStateEvent?.Invoke(true);
+            };
+            this.freezeCbox.Unchecked += (s, e) =>
+            {
+                this.SetFreezeCalculateStateEvent?.Invoke(false);
+            };
           
         }
 
         public override event CalculateDelegate CalculateEvent;
         public override event ShowSummaryDelegate ShowSummaryEvent;
+        public override event SetFreezeCalculateStateDelegate SetFreezeCalculateStateEvent;
 
         public override void IsCalculateNode(bool isCalculateNode)
         {

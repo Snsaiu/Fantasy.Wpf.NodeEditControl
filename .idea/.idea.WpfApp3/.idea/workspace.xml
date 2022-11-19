@@ -4,17 +4,7 @@
     <projectFile>WpfApp3/WpfApp3.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4dcacec3-15f1-46bc-b0b2-c1a776aa41f9" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.WpfApp3/.idea/riderMarkupCache.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.WpfApp3/.idea/riderMarkupCache.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.WpfApp3/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.WpfApp3/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Fantasy.Wpf.NodeEditControl/Controls/Bases/NodeBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Fantasy.Wpf.NodeEditControl/Controls/Bases/NodeBase.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Fantasy.Wpf.NodeEditControl/Controls/Bases/NodeInfoDialogBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Fantasy.Wpf.NodeEditControl/Controls/Bases/NodeInfoDialogBase.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Fantasy.Wpf.NodeEditControl/Controls/Nodes/AdditionNode.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Fantasy.Wpf.NodeEditControl/Controls/Nodes/AdditionNode.xaml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Fantasy.Wpf.NodeEditControl/Controls/Nodes/MultiplicationNode.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Fantasy.Wpf.NodeEditControl/Controls/Nodes/MultiplicationNode.xaml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Fantasy.Wpf.NodeEditControl/Factory/FantasyNodeFactoryBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Fantasy.Wpf.NodeEditControl/Factory/FantasyNodeFactoryBase.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Fantasy.Wpf.NodeEditControl/NotifyModel/IPortPositionChangedSubject.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Fantasy.Wpf.NodeEditControl/NotifyModel/PortPositionChangedNotificator.cs" beforeDir="false" />
-    </list>
+    <list default="true" id="4dcacec3-15f1-46bc-b0b2-c1a776aa41f9" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -26,6 +16,7 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProjectId" id="2HinHcb8aQs49dOXyc79dwCHvkQ" />
   <component name="ProjectViewState">
     <option name="flattenPackages" value="true" />
@@ -77,15 +68,37 @@
       <option name="presentableId" value="Default" />
       <updated>1668776686935</updated>
       <workItem from="1668776687786" duration="160000" />
-      <workItem from="1668777496298" duration="1156000" />
+      <workItem from="1668777496298" duration="1298000" />
     </task>
+    <task id="LOCAL-00001" summary="添加信息展示">
+      <created>1668778790484</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1668778790484</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="UnityCheckinConfiguration" checkUnsavedScenes="true" />
   <component name="UnityUnitTestConfiguration" currentTestLauncher="NUnit" />
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+    <MESSAGE value="添加信息展示" />
+    <option name="LAST_COMMIT_MESSAGE" value="添加信息展示" />
   </component>
 </project>

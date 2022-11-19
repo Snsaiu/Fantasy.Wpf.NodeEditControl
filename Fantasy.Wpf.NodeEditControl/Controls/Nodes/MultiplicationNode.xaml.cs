@@ -38,7 +38,7 @@ namespace Fantasy.Wpf.NodeEditControl.Controls.Nodes
             return new Size(200, 100);
         }
 
-        public override OutputData Calculate()
+        protected override OutputData CalculateImpl()
         {
             OutputData d = new OutputData();
             if (this.input1.ConnectedLines.Count == 0 || this.input2.ConnectedLines.Count == 0)
