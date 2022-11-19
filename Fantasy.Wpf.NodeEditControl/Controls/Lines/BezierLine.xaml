@@ -6,16 +6,18 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Fantasy.Wpf.NodeEditControl.Controls.Lines"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
+            >
+    <Grid  HorizontalAlignment="Center" VerticalAlignment="Center">
+       
         <Path Name="path"  >
             <Path.Data>
                 <PathGeometry>
                     <PathFigure  x:Name="figure">
-                        <BezierSegment x:Name="segment" Point1="250,0" Point2="50,200" Point3="300,200"/>
+                        <BezierSegment x:Name="segment"  Point1="250,0" Point2="50,200" Point3="300,200"/>
                     </PathFigure>
                 </PathGeometry>
             </Path.Data>
         </Path>
-    </Grid>
+        <TextBlock   HorizontalAlignment="Center" VerticalAlignment="Center"  Foreground="Wheat" TextWrapping="Wrap"  Name="label"></TextBlock>
+</Grid>
 </bases:LineBase>

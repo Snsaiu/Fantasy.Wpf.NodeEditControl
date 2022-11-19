@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -25,6 +26,24 @@ namespace Fantasy.Wpf.NodeEditControl.Controls.Bases
 
         public abstract void UpdateLineWidth(int width);
 
+        /// <summary>
+        /// 附加数据
+        /// </summary>
+        private object _metaData;
+
+        /// <summary>
+        /// 将附加数据添加到线上
+        /// </summary>
+        public virtual void RigMetaData(object metaData)
+        {
+
+        }
+
+        public void SetMetaData(object sourceData)
+        {
+            this._metaData= sourceData;
+            this.RigMetaData(this._metaData);
+        }
 
         public LineBase()
         {

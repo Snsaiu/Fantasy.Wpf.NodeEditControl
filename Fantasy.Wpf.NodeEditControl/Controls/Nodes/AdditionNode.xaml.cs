@@ -58,7 +58,12 @@ namespace Fantasy.Wpf.NodeEditControl.Controls.Nodes
 
           var p1=  this.input1.ConnectedLines[0].HeaderNode.Calculate();
            var p2= this.input2.ConnectedLines[0].HeaderNode.Calculate();
-            
+
+           if (p1.Data == null || p2.Data == null)
+           {
+               Tools.ShowWarning("警告", "输入端口未连接");
+               return d;
+            }
             if(p1.DataType==p2.DataType)
             {
                 if(p1.DataType==typeof(string))
