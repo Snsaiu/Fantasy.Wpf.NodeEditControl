@@ -22,7 +22,46 @@ namespace Fantasy.Wpf.NodeEditControl.Controls.Bases
     public abstract class NodeBase : UserControl, ICanvasElementBase
     {
 
-        
+        /// <summary>
+        /// 当有属性发生更改的时候，可以通知所连接的节点进行计算
+        /// </summary>
+        public void NotifyCalculate()
+        {
+            if (this._ports .Count!= 0)
+            {
+               var outputPorts=  this._ports.Where(x => x.PortType == Enums.PortType.Output).ToList();
+               foreach (var outputPort in outputPorts)
+               {
+                   var connectLines = outputPort.ConnectedLines;
+                   if (connectLines.Count > 0)
+                   {
+                       foreach (var connectLine in connectLines)
+                       {
+                           var tailNode = connectLine.TailNode;
+                           if (tailNode != null)
+                           {
+                                tailNode.NotifyCalculate();
+                           }
+                          
+                       }
+                   }
+                   else
+                   {
+                       var data = this.Calculate();
+                       var outputport = _ports.FirstOrDefault(x => x.PortType == Enums.PortType.Output);
+                       if (outputport != null)
+                       {
+                           outputport.Data = data;
+                       }
+                       else
+                       {
+                           throw new NullReferenceException();
+                       }
+                    }
+               }
+
+            }
+        }
 
         private List<PortBase> _ports;
 

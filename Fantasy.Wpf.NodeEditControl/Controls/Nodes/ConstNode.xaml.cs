@@ -23,19 +23,17 @@ namespace Fantasy.Wpf.NodeEditControl.Controls.Nodes
     /// </summary>
     public partial class ConstNode : NodeBase
     {
-        private int index = 1;
+    
         public ConstNode()
         {
 
             InitializeComponent();
             this.inputTxt.Text = "1";
-            this.MouseDoubleClick += (s, e) =>
+            this.inputTxt.TextChanged += (s, e) =>
             {
-
-                this.index++;
-                this.inputTxt.Text = this.index.ToString();
-
+                this.NotifyCalculate();
             };
+
         }
         protected override OutputData CalculateImpl()
         {
