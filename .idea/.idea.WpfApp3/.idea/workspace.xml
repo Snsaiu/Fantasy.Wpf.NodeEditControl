@@ -4,13 +4,27 @@
     <projectFile>WpfApp3/WpfApp3.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4dcacec3-15f1-46bc-b0b2-c1a776aa41f9" name="Changes" comment="" />
+    <list default="true" id="4dcacec3-15f1-46bc-b0b2-c1a776aa41f9" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.WpfApp3/.idea/riderMarkupCache.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.WpfApp3/.idea/riderMarkupCache.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.WpfApp3/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.WpfApp3/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy.Wpf.NodeEditControl/Controls/Bases/NodeBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Fantasy.Wpf.NodeEditControl/Controls/Bases/NodeBase.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy.Wpf.NodeEditControl/Controls/Bases/NodeContainerBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Fantasy.Wpf.NodeEditControl/Controls/Bases/NodeContainerBase.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy.Wpf.NodeEditControl/Controls/Node.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Fantasy.Wpf.NodeEditControl/Controls/Node.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy.Wpf.NodeEditControl/Controls/NodeContainer.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/Fantasy.Wpf.NodeEditControl/Controls/NodeContainer.xaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy.Wpf.NodeEditControl/Controls/NodeContainer.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Fantasy.Wpf.NodeEditControl/Controls/NodeContainer.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy.Wpf.NodeEditControl/Controls/Nodes/AdditionNode.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Fantasy.Wpf.NodeEditControl/Controls/Nodes/AdditionNode.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy.Wpf.NodeEditControl/Controls/Nodes/ConstNode.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Fantasy.Wpf.NodeEditControl/Controls/Nodes/ConstNode.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy.Wpf.NodeEditControl/Controls/Nodes/MultiplicationNode.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Fantasy.Wpf.NodeEditControl/Controls/Nodes/MultiplicationNode.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy.Wpf.NodeEditControl/Factory/FantasyNodeFactoryBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Fantasy.Wpf.NodeEditControl/Factory/FantasyNodeFactoryBase.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy.Wpf.NodeEditControl/Fantasy.Wpf.NodeEditControl.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Fantasy.Wpf.NodeEditControl/Fantasy.Wpf.NodeEditControl.csproj" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="mock://G:/PROJECT/Snsaiu/Fantasy.Wpf.NodeEditControl/Fantasy.Wpf.NodeEditControl/Controls/NodeContainer.xaml.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Fantasy.Wpf.NodeEditControl/obj/Debug/net6.0-windows/Controls/Nodes/AdditionNode.g.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -69,6 +83,7 @@
       <updated>1668776686935</updated>
       <workItem from="1668776687786" duration="160000" />
       <workItem from="1668777496298" duration="1298000" />
+      <workItem from="1668864699150" duration="3739000" />
     </task>
     <task id="LOCAL-00001" summary="添加信息展示">
       <created>1668778790484</created>
@@ -100,5 +115,24 @@
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="添加信息展示" />
     <option name="LAST_COMMIT_MESSAGE" value="添加信息展示" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Fantasy.Wpf.NodeEditControl/Controls/Nodes/AdditionNode.xaml.cs</url>
+          <line>53</line>
+          <properties documentPath="G:\PROJECT\Snsaiu\Fantasy.Wpf.NodeEditControl\Fantasy.Wpf.NodeEditControl\Controls\Nodes\AdditionNode.xaml.cs" initialLine="53" containingFunctionPresentation="method 'CalculateImpl'">
+            <startOffsets>
+              <option value="1345" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1377" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
