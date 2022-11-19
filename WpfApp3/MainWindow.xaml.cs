@@ -1,4 +1,8 @@
-﻿using Fantasy.Wpf.NodeEditControl.Controls.Nodes;
+﻿using Fantasy.Wpf.NodeEditControl;
+using Fantasy.Wpf.NodeEditControl.Controls.Bases;
+using Fantasy.Wpf.NodeEditControl.Controls.Lines;
+using Fantasy.Wpf.NodeEditControl.Controls.Nodes;
+using Fantasy.Wpf.NodeEditControl.Factory;
 
 using System;
 using System.Collections.Generic;
@@ -26,6 +30,8 @@ namespace WpfApp3
         {
             InitializeComponent();
 
+            FantasyNodeGlobalSetting.ConfigFantasy = new MyStyle();
+
             this.canvas.RegistNode(typeof(AdditionNode), "加法");
             this.canvas.RegistNode(typeof(ConstNode), "常量");
             this.canvas.RegistNode(typeof(MultiplicationNode), "乘法");
@@ -34,6 +40,16 @@ namespace WpfApp3
             //this.canvas.AddNode(new AdditionNode() { Position = new Point(300, 400), Canvas = this.canvas });
             //this.canvas.AddNode(new ConstNode() { Position = new Point(300, 400), Canvas = this.canvas });
             //this.canvas.AddNode(new ConstNode() { Position = new Point(300, 400), Canvas = this.canvas });
+        }
+
+       
+    }
+
+    public class MyStyle : FantasyNodeFactoryBase
+    {
+        public override LineBase SetLineStyle()
+        {
+            return new BezierLine();
         }
     }
 }
