@@ -50,12 +50,20 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
             {
                 this.SetFreezeCalculateStateEvent?.Invoke(false);
             };
-          
+
+            this.settingBtn.Click += (s, e) =>
+            {
+                this.SetSettingPanelEvent?.Invoke();
+
+
+            };
+
         }
 
         public override event CalculateDelegate CalculateEvent;
         public override event ShowSummaryDelegate ShowSummaryEvent;
         public override event SetFreezeCalculateStateDelegate SetFreezeCalculateStateEvent;
+        public override event ShowSettingPanelDelegate SetSettingPanelEvent;
 
         public override void IsCalculateNode(bool isCalculateNode)
         {

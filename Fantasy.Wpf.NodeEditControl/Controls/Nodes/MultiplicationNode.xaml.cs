@@ -38,7 +38,7 @@ namespace Fantasy.Wpf.NodeEditControl.Controls.Nodes
             return new Size(200, 100);
         }
 
-        protected override OutputData CalculateImpl()
+        protected override OutputData CalculateImpl(object data)
         {
             OutputData d = new OutputData();
             if (this.input1.ConnectedLines.Count == 0 || this.input2.ConnectedLines.Count == 0)
@@ -93,6 +93,11 @@ namespace Fantasy.Wpf.NodeEditControl.Controls.Nodes
         {
             return new List<Type> { typeof(int), typeof(double), typeof(float), typeof(decimal) };
 
+        }
+
+        public override SettingPanelBase SetSettingContent()
+        {
+            throw new NotImplementedException();
         }
 
         public override string GetNodeSummary()

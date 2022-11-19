@@ -8,7 +8,9 @@ using System.Windows.Controls;
 
 namespace Fantasy.Wpf.NodeEditControl.Controls.Bases
 {
-
+    /// <summary>
+    ///  start calculate delegate
+    /// </summary>
     public delegate void CalculateDelegate();
 
     /// <summary>
@@ -16,8 +18,16 @@ namespace Fantasy.Wpf.NodeEditControl.Controls.Bases
     /// </summary>
     public delegate void ShowSummaryDelegate();
 
-
+    /// <summary>
+    ///  set current node can calculate delegate,if true and no calculate record ,the node will calculate once .otherwise will read cache
+    /// </summary>
+    /// <param name="state"></param>
     public delegate void SetFreezeCalculateStateDelegate(bool state);
+
+    /// <summary>
+    /// open setting panel delegate
+    /// </summary>
+    public delegate void ShowSettingPanelDelegate();
 
     public abstract class NodeContainerBase : UserControl
     {
@@ -32,6 +42,7 @@ namespace Fantasy.Wpf.NodeEditControl.Controls.Bases
         /// </summary>
         public abstract event SetFreezeCalculateStateDelegate SetFreezeCalculateStateEvent;
 
+        public abstract event ShowSettingPanelDelegate SetSettingPanelEvent;
 
         public NodeContainerBase()
         {

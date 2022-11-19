@@ -23,21 +23,19 @@ namespace Fantasy.Wpf.NodeEditControl.Controls.Nodes
     /// </summary>
     public partial class ConstNode : NodeBase
     {
-        private int index = 1;
+    
         public ConstNode()
         {
 
             InitializeComponent();
             this.inputTxt.Text = "1";
-            this.MouseDoubleClick += (s, e) =>
+            this.inputTxt.TextChanged += (s, e) =>
             {
-
-                this.index++;
-                this.inputTxt.Text = this.index.ToString();
-
+                this.NotifyCalculate();
             };
+
         }
-        protected override OutputData CalculateImpl()
+        protected override OutputData CalculateImpl(object data)
         {
             string content = this.inputTxt.Text;
             var od = new OutputData();
@@ -83,9 +81,14 @@ namespace Fantasy.Wpf.NodeEditControl.Controls.Nodes
             return new List<Type> { typeof(string), typeof(int), typeof(double), typeof(float), typeof(decimal) };
         }
 
+        public override SettingPanelBase SetSettingContent()
+        {
+            throw new NotImplementedException();
+        }
+
         public override string GetNodeSummary()
         {
-            string content = "一个固定不变的值，该至可以是文本和数字";
+            string content = "一个固定不变的值，可以是文本和数字";
             return content;
         }
     }

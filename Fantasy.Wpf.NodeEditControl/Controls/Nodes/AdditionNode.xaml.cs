@@ -47,8 +47,10 @@ namespace Fantasy.Wpf.NodeEditControl.Controls.Nodes
             return new Size(200, 100);
         }
 
-        protected override OutputData CalculateImpl()
+        protected override OutputData CalculateImpl(object data)
         {
+            
+
             OutputData d = new OutputData();
            if (this.input1.ConnectedLines.Count==0||this.input2.ConnectedLines.Count==0)
             {
@@ -58,33 +60,69 @@ namespace Fantasy.Wpf.NodeEditControl.Controls.Nodes
 
           var p1=  this.input1.ConnectedLines[0].HeaderNode.Calculate();
            var p2= this.input2.ConnectedLines[0].HeaderNode.Calculate();
-            
-            if(p1.DataType==p2.DataType)
-            {
-                if(p1.DataType==typeof(string))
-                {
-                    d.Data = p1.Data.ToString() + p2.Data.ToString();
-                    d.DataType = typeof(string);
-                }
-                else if(p1.DataType==typeof(int)) {
-                
-                    d.Data=int.Parse(p1.Data.ToString())+ int.Parse(p2.Data.ToString());
-                    d.DataType=typeof(int);
-                }
-                else if (p1.DataType == typeof(double))
-                {
 
-                    d.Data = double.Parse(p1.Data.ToString()) + double.Parse(p2.Data.ToString());
-                    d.DataType = typeof(double);
-                }
+           if (p1.Data == null || p2.Data == null)
+           {
+               Tools.ShowWarning("警告", "输入端口未连接");
+               return d;
             }
-            else
-            {
-                d.Data = p1.Data.ToString() + p2.Data.ToString();
-                d.DataType=typeof(string);
-               
-            }
-            this.richTxt.Text = d.Data.ToString();
+
+           if (data == null || data == "")
+           {
+               if (p1.DataType == p2.DataType)
+               {
+                   if (p1.DataType == typeof(string))
+                   {
+                       d.Data = p1.Data.ToString() + p2.Data.ToString();
+                       d.DataType = typeof(string);
+                   }
+                   else if (p1.DataType == typeof(int))
+                   {
+
+                       d.Data = int.Parse(p1.Data.ToString()) + int.Parse(p2.Data.ToString());
+                       d.DataType = typeof(int);
+                   }
+                   else if (p1.DataType == typeof(double))
+                   {
+                       d.Data = double.Parse(p1.Data.ToString()) + double.Parse(p2.Data.ToString());
+                       d.DataType = typeof(double);
+                   }
+               }
+               else
+               {
+                   d.Data = p1.Data.ToString() + p2.Data.ToString();
+                   d.DataType = typeof(string);
+
+               }
+
+           }
+           else
+           {
+               string dataStr = data.ToString();
+               if (int.TryParse(dataStr, out int x)||double.TryParse(dataStr,out double y))
+               {
+                 if(
+                     (p1.DataType==typeof(int)||p1.DataType==typeof(double))
+                         && (p2.DataType==typeof(int)||p2.DataType==typeof(double))
+                         )
+                 {
+                     d.Data = double.Parse(dataStr) + double.Parse(p1.Data.ToString()) + double.Parse(p2.Data.ToString());
+
+                 }
+                 else
+                 {
+                     d.Data = dataStr.ToString() + p1.Data.ToString() + p2.Data.ToString();
+                 }
+                   
+               }
+               else
+               {
+                   d.Data =  p1.Data.ToString() + p2.Data.ToString()+dataStr.ToString() ;
+               }
+           }
+
+
+           this.richTxt.Text = d.Data.ToString();
             return d;
         }
 
@@ -106,6 +144,11 @@ namespace Fantasy.Wpf.NodeEditControl.Controls.Nodes
         public override List<Type> SupportOutputTypes()
         {
             return new List<Type> { typeof(string), typeof(int), typeof(double), typeof(float), typeof(decimal) };
+        }
+
+        public override SettingPanelBase SetSettingContent()
+        {
+            return new AdditionNodeSettingPanel();
         }
     }
 }

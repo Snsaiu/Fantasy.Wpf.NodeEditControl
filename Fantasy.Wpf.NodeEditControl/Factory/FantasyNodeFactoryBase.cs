@@ -25,6 +25,10 @@ namespace Fantasy.Wpf.NodeEditControl.Factory
         {
             return new DefaultNodeInfoDialog();
         }
-       
+
+        public virtual SettingDialogBase SetSettingDialogStyle()
+        {
+            return new DefaultNodeSettingDialog();
+        }
     }
 }

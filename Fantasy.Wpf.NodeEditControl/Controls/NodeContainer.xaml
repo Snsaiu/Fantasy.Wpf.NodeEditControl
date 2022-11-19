@@ -36,8 +36,8 @@
                     <ColumnDefinition Width="auto"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                <TextBlock Margin="20,0" VerticalAlignment="Center" x:Name="title" Foreground="Black"></TextBlock>
-                <StackPanel Margin="10,2" Grid.Column="1" HorizontalAlignment="Right" Orientation="Horizontal" Background="Gray">
+                <TextBlock Margin="20,0" HorizontalAlignment="Left" VerticalAlignment="Center" x:Name="title" Foreground="Black"></TextBlock>
+                <StackPanel Margin="5,2" Grid.Column="1" HorizontalAlignment="Right" Orientation="Horizontal" Background="Gray">
 
                     
                         
@@ -49,6 +49,11 @@
                             <ImageBrush Stretch="Uniform" ImageSource="/Fantasy.Wpf.NodeEditControl;component/Images/refresh.png"/>
                         </Button.Background>
 
+                    </Button>
+                    <Button Width="20" x:Name="settingBtn"  Margin="5,0" BorderThickness="0">
+                        <Button.Background>
+                            <ImageBrush  Stretch="Uniform" ImageSource="/Fantasy.Wpf.NodeEditControl;component/Images/setting.png"/>
+                        </Button.Background>
                     </Button>
                     <Button Width="20" x:Name="infoBtn"  Margin="5,0" BorderThickness="0">
                         <Button.Background>

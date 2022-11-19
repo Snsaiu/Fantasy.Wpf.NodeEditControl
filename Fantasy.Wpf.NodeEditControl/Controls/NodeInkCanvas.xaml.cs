@@ -164,6 +164,14 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
                                             
                                         };
                                         cm.Items.Add(deleteItem);
+
+                                        MenuItem attachContentItem=new MenuItem();
+                                        attachContentItem.Header = "添加描述";
+                                        attachContentItem.Click += (x, xx) =>
+                                        {
+                                            line.SetMetaData("你好");
+                                        };
+                                        cm.Items.Add(attachContentItem);    
                                        line.ContextMenu = cm;
                                     }
                                     else if(this.GetSelectElement() is NodeBase node)

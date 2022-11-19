@@ -67,7 +67,12 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
             throw new NotImplementedException();
         }
 
-        protected override OutputData CalculateImpl()
+        public override SettingPanelBase SetSettingContent()
+        {
+            throw new NotImplementedException();
+        }
+
+        protected override OutputData CalculateImpl(object data)
         {
             throw new NotImplementedException();
         }

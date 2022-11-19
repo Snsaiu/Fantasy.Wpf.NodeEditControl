@@ -31,9 +31,6 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
         /// </summary>
         private int _lineWidth = 1;
 
-        private bool _triangleCanMove = false;
-
-        private bool _circleCanMove = false;
 
         public ArrowLine()
         {
@@ -42,76 +39,7 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
             this.line.StrokeThickness = this.LineWidth;
             this.triangle.Stroke = this.Color;
             
-            //this.triangle.MouseDown += (s, e) =>
-            //{
-            //    this._triangleCanMove = true;
-            //};
-    
-            //this.triangle.MouseUp += (s, e) =>
-            //{
-            //  this._triangleCanMove = false;
-            //    this.triangle.StrokeThickness = 1;
-            //    var p = e.MouseDevice.GetPosition((UIElement)this.Parent);
-            //    VisualTreeHelper.HitTest((UIElement)this.Parent, null, resultCallback: (x) =>
-            //    {
-            //        if (x.VisualHit != null)
-            //        {
-            //            this.ValidateConnectEndPort(x.VisualHit);
-            //        }
-
-            //        return HitTestResultBehavior.Continue;
-
-            //    }, new PointHitTestParameters(p));
-            //};
-
-           
-
-            //this.triangle.MouseMove += (s, e) =>
-            //{
-            //    var p = e.MouseDevice.GetPosition((UIElement)this.Parent);
-            //    if (e.MouseDevice.LeftButton==MouseButtonState.Pressed)
-            //    {
-            //            this.line.X2 = p.X+15;
-            //            this.line.Y2 = p.Y+10;
-            //            this.updateTriangle(this.line.X1, this.line.Y1, this.line.X2, this.line.Y2);
-                   
-            //    }
-            //    else
-            //    {
-                   
-            //    }
-    
-          
-            //   // Debug.WriteLine($"x:{p.X}  y:{p.Y}");
-            //};
-
-            //this.tail.MouseUp += (s, e) =>
-            //{
-            //    this.tail.Data = new EllipseGeometry(new Point(this.line.X1, this.line.Y1), this._lineWidth, this._lineWidth);
-            //    var p = e.MouseDevice.GetPosition((UIElement)this.Parent);
-            //    VisualTreeHelper.HitTest((UIElement)this.Parent, null, resultCallback: (x) =>
-            //    {
-            //        if (x.VisualHit != null)
-            //        {
-            //            this.ValidateConnectStartPort(x.VisualHit);
-            //        }
-
-            //        return HitTestResultBehavior.Continue;
-
-            //    }, new PointHitTestParameters(p));
-            //};
-            //this.tail.MouseMove += (s, e) =>
-            //{
-            //    if (e.MouseDevice.LeftButton == MouseButtonState.Pressed)
-            //    {
-            //        var p = e.MouseDevice.GetPosition((UIElement)this.Parent);
-            //        this.line.X1 = p.X ;
-            //        this.line.Y1 = p.Y;
-            //        this.tail.Data = new EllipseGeometry(new Point(this.line.X1, this.line.Y1), this._lineWidth, this._lineWidth);
-            //        this.updateTriangle(this.line.X1, this.line.Y1, this.line.X2, this.line.Y2);
-            //    }
-            
-            //};
+       
 
         }
 
