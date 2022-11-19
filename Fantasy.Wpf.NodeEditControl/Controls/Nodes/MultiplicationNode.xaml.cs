@@ -1,4 +1,5 @@
-﻿using Fantasy.Wpf.NodeEditControl.Data;
+﻿using Fantasy.Wpf.NodeEditControl.Controls.Bases;
+using Fantasy.Wpf.NodeEditControl.Data;
 using Fantasy.Wpf.NodeEditControl.Helpers;
 
 using System;
@@ -37,7 +38,7 @@ namespace Fantasy.Wpf.NodeEditControl.Controls.Nodes
             return new Size(200, 100);
         }
 
-        public override OutputData Calculate()
+        protected override OutputData CalculateImpl()
         {
             OutputData d = new OutputData();
             if (this.input1.ConnectedLines.Count == 0 || this.input2.ConnectedLines.Count == 0)
@@ -90,7 +91,14 @@ namespace Fantasy.Wpf.NodeEditControl.Controls.Nodes
 
         public override List<Type> SupportOutputTypes()
         {
-            return new List<Type> {typeof(int), typeof(double), typeof(float), typeof(decimal) };
+            return new List<Type> { typeof(int), typeof(double), typeof(float), typeof(decimal) };
+
+        }
+
+        public override string GetNodeSummary()
+        {
+            string content = "两个数相乘";
+            return content;
         }
     }
 }

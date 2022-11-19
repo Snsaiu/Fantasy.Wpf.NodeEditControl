@@ -10,15 +10,15 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace Fantasy.Wpf.NodeEditControl.Controls
-{ 
+namespace Fantasy.Wpf.NodeEditControl.Controls.Bases
+{
 
-  public  delegate void RegistNodeDelegate(RegistNodeItem node);
+    public delegate void RegistNodeDelegate(RegistNodeItem node);
 
-    public abstract class NodeCanvasBase:UserControl
+    public abstract class NodeCanvasBase : UserControl
     {
 
-    public event RegistNodeDelegate RegistNodeEvent;
+        public event RegistNodeDelegate RegistNodeEvent;
 
         /// <summary>
         /// 被选中
@@ -35,29 +35,29 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
 
         protected List<RegistNodeItem> Nodes { get; private set; } = new List<RegistNodeItem>();
 
-        public void RegistNode(Type node,string nodeName,ImageSource logo=null,string groupName="通用")
+        public void RegistNode(Type node, string nodeName, ImageSource logo = null, string groupName = "通用")
         {
-        
-            if(this.Nodes.Exists(x=>x.GroupName==groupName&&x.NodeName==nodeName)==false)
+
+            if (Nodes.Exists(x => x.GroupName == groupName && x.NodeName == nodeName) == false)
             {
-                if(logo==null)
-                    logo= Tools.LoadBitmapFromResource("Resouces\\Images\\nullLogo.png");
-            var item = new RegistNodeItem { GroupName = groupName, NodeName = nodeName, NodeType = node, NodeLogo = logo };
-                this.Nodes.Add(item);
-            this.RegistNodeEvent?.Invoke(item);
+                if (logo == null)
+                    logo = Tools.LoadBitmapFromResource("Resouces\\Images\\nullLogo.png");
+                var item = new RegistNodeItem { GroupName = groupName, NodeName = nodeName, NodeType = node, NodeLogo = logo };
+                Nodes.Add(item);
+                RegistNodeEvent?.Invoke(item);
             }
 
         }
-        
+
 
         public void ClearSelectElement()
         {
-            this._selectElement = null;
+            _selectElement = null;
         }
 
         public ICanvasElementBase GetSelectElement()
         {
-            return this._selectElement;
+            return _selectElement;
         }
 
 
@@ -68,13 +68,13 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
 
 
 
-        protected bool HitElement(FrameworkElement element,Point point)
+        protected bool HitElement(FrameworkElement element, Point point)
         {
             VisualTreeHelper.HitTest(element, null, resultCallback: (x) =>
             {
                 if (x.VisualHit != null)
                 {
-                    bool hitRes = this.hitTest((FrameworkElement)x.VisualHit, point);
+                    bool hitRes = hitTest((FrameworkElement)x.VisualHit, point);
                     if (hitRes == true)
                     {
                         return HitTestResultBehavior.Stop;
@@ -83,14 +83,14 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
                 return HitTestResultBehavior.Continue;
             }, new PointHitTestParameters(point));
 
-            return this._selectElement != null ? true : false;
+            return _selectElement != null ? true : false;
         }
 
         /// <summary>
         /// 当鼠标点击的时候选择的控件
         /// </summary>
         /// <param name="element"></param>
-       private bool  hitTest(FrameworkElement element,Point position)
+        private bool hitTest(FrameworkElement element, Point position)
         {
 
             while (true)
@@ -99,37 +99,37 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
                 {
                     if (element is LineBase l)
                     {
-                        this._selectElement = l;
+                        _selectElement = l;
                         break;
                     }
-                    else if(element is PortBase p)
+                    else if (element is PortBase p)
                     {
-                        this._selectElement = p;
+                        _selectElement = p;
 
-                        this._newLine = p.CreateLine();
-                        if (this._newLine != null)
+                        _newLine = p.CreateLine();
+                        if (_newLine != null)
                         {
-                            this._newLine.Canvas = this;
-                            this.CreateLine(this._newLine);
-                            p.AddLine(this._newLine);
+                            _newLine.Canvas = this;
+                            CreateLine(_newLine);
+                            p.AddLine(_newLine);
 
 
                             if (p.PortType == Enums.PortType.Output)
                             {
-                                this._newLine.UpdateEndPoint(position);
-                                this._newLine.ValidateConnectStartPort(element);
+                                _newLine.UpdateEndPoint(position);
+                                _newLine.ValidateConnectStartPort(element);
                             }
                             else
                             {
-                                this._newLine.UpdateStartPoint(position);
+                                _newLine.UpdateStartPoint(position);
                             }
                         }
 
                         break;
                     }
-                    else if(element is NodeBase n)
+                    else if (element is NodeBase n)
                     {
-                        this._selectElement = n;
+                        _selectElement = n;
                         break;
                     }
                     else
@@ -143,7 +143,7 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
                     break;
                 }
             }
-            if(this._selectElement==null)
+            if (_selectElement == null)
             { return false; }
             return true;
         }
@@ -151,69 +151,70 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
 
         public virtual void ReleaseMouse(Point point)
         {
-            if(this._selectElement!=null)
+            if (_selectElement != null)
             {
 
 
-                if(this._selectElement is PortBase p)
+                if (_selectElement is PortBase p)
                 {
-                     if(p.PortType==Enums.PortType.Output)
+                    if (p.PortType == Enums.PortType.Output)
                     {
-                        VisualTreeHelper.HitTest((UIElement)this, null, resultCallback: (x) =>
+                        VisualTreeHelper.HitTest(this, null, resultCallback: (x) =>
                         {
                             if (x.VisualHit != null)
                             {
-                                this._newLine.ValidateConnectEndPort(x.VisualHit);
+                                _newLine.ValidateConnectEndPort(x.VisualHit);
                             }
 
                             return HitTestResultBehavior.Continue;
 
                         }, new PointHitTestParameters(point));
-                    
 
-                    if (this._newLine.TailNode==null)
+
+                        if (_newLine.TailNode == null)
                         {
-                            this.RemoveLine(this._newLine);
-                            p.RemoveLine(this._newLine);
-                          
+                            RemoveLine(_newLine);
+                            p.RemoveLine(_newLine);
+
                         }
-                        this._newLine = null;
+                        _newLine = null;
 
                     }
                 }
 
             }
-            this._selectElement = null;
+            _selectElement = null;
         }
-        
+
 
         /// <summary>
         /// 鼠标移动如果有控件被选择那么跟着鼠标移动
         /// </summary>
         /// <param name="point"></param>
-        public virtual void Move(Point point) { 
-        
-            if(this._selectElement!=null)
+        public virtual void Move(Point point)
+        {
+
+            if (_selectElement != null)
             {
-                if(this._selectElement is NodeBase nb)
+                if (_selectElement is NodeBase nb)
                 {
 
-                   point.X=point.X-nb.Width/2;
-                    point.Y=point.Y-nb.Height/2;
+                    point.X = point.X - nb.Width / 2;
+                    point.Y = point.Y - nb.Height / 2;
                     nb.Position = point;
                     nb.UpdateNodePortWithLinesPosition();
                 }
-                else if(this._selectElement is PortBase pb)
+                else if (_selectElement is PortBase pb)
                 {
-                    if(this._newLine!=null)
+                    if (_newLine != null)
                     {
-                        if(pb.PortType==Enums.PortType.Output)
+                        if (pb.PortType == Enums.PortType.Output)
                         {
-                            this._newLine.UpdateEndPoint(point);
+                            _newLine.UpdateEndPoint(point);
                         }
-                        else if(pb.PortType==Enums.PortType.Input)
+                        else if (pb.PortType == Enums.PortType.Input)
                         {
-                            this._newLine.UpdateStartPoint(point);
+                            _newLine.UpdateStartPoint(point);
                         }
                     }
 
@@ -221,16 +222,16 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
                 }
             }
 
-           
+
         }
 
         /// <summary>
         /// 移除节点
         /// </summary>
         /// <param name="node"></param>
-        public  void RemoveNode(NodeBase node)
+        public void RemoveNode(NodeBase node)
         {
-            this.RemoveNodeElement(node);
+            RemoveNodeElement(node);
             foreach (var item in node.GetPorts())
             {
                 for (int i = 0; i < item.ConnectedLines.Count; i++)
@@ -256,20 +257,20 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
                     }
 
                     item.ConnectedLines[i].HeaderNode = null;
-                    this.RemoveLineElement(item.ConnectedLines[i]);
+                    RemoveLineElement(item.ConnectedLines[i]);
 
                 }
                 item.ConnectedLines.Clear();
             }
-            this.ClearSelectElement();
+            ClearSelectElement();
         }
 
 
         public void RemoveLine(LineBase line)
         {
             line.Disconnect();
-            this.RemoveLineElement(line);
-            this.ClearSelectElement();
+            RemoveLineElement(line);
+            ClearSelectElement();
         }
     }
 }

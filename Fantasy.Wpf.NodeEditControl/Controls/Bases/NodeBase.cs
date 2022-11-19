@@ -17,11 +17,12 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Xml.Linq;
 
-namespace Fantasy.Wpf.NodeEditControl.Controls
+namespace Fantasy.Wpf.NodeEditControl.Controls.Bases
 {
     public abstract class NodeBase : UserControl, ICanvasElementBase
     {
 
+        
 
         private List<PortBase> _ports;
 
@@ -35,7 +36,29 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
 
         public NodeCanvasBase Canvas { get; set; }
 
-        public abstract OutputData Calculate();
+        public  OutputData Calculate()
+        {
+            if(this.FreezeCalculate)
+            {
+                if(this._freezeData == null)
+                {
+                    this._freezeData = this.CalculateImpl();
+                }
+            }
+            else
+            {
+                this._freezeData= this.CalculateImpl();
+            }
+     
+            return this._freezeData;    
+
+        }
+
+        /// <summary>
+        /// 计算
+        /// </summary>
+        /// <returns></returns>
+        protected abstract OutputData CalculateImpl();
 
         protected abstract Size GetNodeSize();
 
@@ -45,10 +68,16 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
         /// <returns></returns>
         protected abstract string GetNodeName();
 
+        /// <summary>
+        /// get node summary document
+        /// </summary>
+        /// <returns></returns>
+        public abstract string GetNodeSummary();
+
 
         protected virtual NodeContainerBase CreateNodeContainerStyle()
         {
-            return new NodeContainer();
+            return  FantasyNodeGlobalSetting.ConfigFantasy.SetNodeContainerStyle(); 
         }
 
 
@@ -62,69 +91,113 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
         public abstract List<Type> SupportOutputTypes();
 
 
+        private OutputData _freezeData = null;
+
+
+        public bool FreezeCalculate
+        {
+            get { return (bool)GetValue(FreezeCalculateProperty); }
+            set { SetValue(FreezeCalculateProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for FreezeCalculate.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty FreezeCalculateProperty =
+            DependencyProperty.Register("FreezeCalculate", typeof(bool), typeof(NodeBase), new PropertyMetadata(false));
+
+
+
+
         public NodeBase()
         {
 
-            
 
-            this.Loaded += (s, e) =>
+
+            Loaded += (s, e) =>
             {
 
-              
-                this._ports = this.GetPorts();
 
-                if(this._ports!=null)
+                _ports = GetPorts();
+
+                if (_ports != null)
                 {
-                    foreach(PortBase port in this._ports)
+                    foreach (PortBase port in _ports)
                     {
                         port.Node = this;
-                        port.Canvas = this.Canvas;
+                        port.Canvas = Canvas;
                     }
                 }
 
-                var sonChild = this.Content as FrameworkElement;
-                this.Content = null;
-                NodeContainerBase nc =  this.CreateNodeContainerStyle();
+                var sonChild = Content as FrameworkElement;
+                Content = null;
+                NodeContainerBase nc = CreateNodeContainerStyle();
                 if (nc == null)
                     throw new NullReferenceException();
-                
-          
-               nc.SetNodeName(this.GetNodeName());
-                nc.IsCalculateNode(this.IsCalculateNode);
-                nc.SetNodeSize(this.GetNodeSize());
 
+                nc.SetNodeName(GetNodeName());
+                nc.IsCalculateNode(IsCalculateNode);
+                nc.SetNodeSize(GetNodeSize());
+
+                nc.ShowSummaryEvent += () =>
+                {
+
+                    NodeInfoDialogBase nodeInfoDialogBase =
+                        FantasyNodeGlobalSetting.ConfigFantasy.SetNodeInfoDialogStyle();
+                    nodeInfoDialogBase.ShowInTaskbar = false;
+                    nodeInfoDialogBase.InitShow(GetNodeName(),this.GetLogo(),this.GetNodeSummary());
+                    nodeInfoDialogBase.ShowDialog();
+                };
+                nc.SetFreezeCalculateStateEvent += (state) =>
+                {
+                    this.FreezeCalculate = state;
+                };
                 nc.CalculateEvent += () =>
                 {
-                    var data= this.Calculate();
-                    var outputport=this._ports.FirstOrDefault(x=>x.PortType==Enums.PortType.Output);
-                    if(outputport!=null)
+
+                    var data = this.Calculate();
+                    var outputport = _ports.FirstOrDefault(x => x.PortType == Enums.PortType.Output);
+                    if (outputport != null)
                     {
                         outputport.Data = data;
                     }
                     else
                     {
-                        throw new NullReferenceException(); 
+                        throw new NullReferenceException();
                     }
+
+
+
                 };
+
+
+
                 nc.SetContent(sonChild);
-                this.Content = nc;
-               
-                if (double.IsNaN(this.Width))
+                Content = nc;
+
+                MouseEnter += (s, e) =>
                 {
-                    this.Width = this.GetNodeSize().Width;
+                    nc.SelectedStyle();
+                };
+                MouseLeave += (s, e) =>
+                {
+                    nc.DefaultStyle();
+                };
+
+                if (double.IsNaN(Width))
+                {
+                    Width = GetNodeSize().Width;
                 }
-                if (double.IsNaN(this.Height))
+                if (double.IsNaN(Height))
                 {
-                    this.Height = this.GetNodeSize().Height;
+                    Height = GetNodeSize().Height;
                 }
 
             };
-         
+
             //this.MouseMove += (s, e) =>
             //{
             //    if(e.MouseDevice.LeftButton==System.Windows.Input.MouseButtonState.Pressed)
             //    {
-        
+
 
             //        var p = e.MouseDevice.GetPosition((UIElement)this.Parent);
             //        InkCanvas.SetLeft(this,p.X-this.Width/2);
@@ -138,8 +211,8 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
             //            item.UpdateLinesPosition();
             //        }
             //    }
-          
-                
+
+
 
             //};
         }
@@ -147,9 +220,9 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
 
         public void UpdateNodePortWithLinesPosition()
         {
-            if (this._ports != null)
+            if (_ports != null)
             {
-                foreach (var item in this._ports)
+                foreach (var item in _ports)
                 {
                     item.UpdateLinesPosition();
                 }

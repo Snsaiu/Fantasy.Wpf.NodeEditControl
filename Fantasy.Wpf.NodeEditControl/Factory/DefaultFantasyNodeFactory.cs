@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Fantasy.Wpf.NodeEditControl.NotifyModel
+namespace Fantasy.Wpf.NodeEditControl.Factory
 {
-    public interface IPortPositionChangedSubject
+    public class DefaultFantasyNodeFactory:FantasyNodeFactoryBase
     {
-        public void Notify();
+
     }
 }

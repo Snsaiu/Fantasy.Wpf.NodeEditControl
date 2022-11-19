@@ -1,5 +1,6 @@
 ﻿
 
+using Fantasy.Wpf.NodeEditControl.Controls.Bases;
 using Fantasy.Wpf.NodeEditControl.Data;
 
 using System;
@@ -36,6 +37,11 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
             return "TEST";
         }
 
+        public override string GetNodeSummary()
+        {
+            throw new NotImplementedException();
+        }
+
         protected override Size GetNodeSize()
         {
             return  new Size(400, 300);
@@ -61,7 +67,7 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
             throw new NotImplementedException();
         }
 
-        public override OutputData Calculate()
+        protected override OutputData CalculateImpl()
         {
             throw new NotImplementedException();
         }

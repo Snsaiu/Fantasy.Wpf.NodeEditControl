@@ -11,9 +11,9 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 
-namespace Fantasy.Wpf.NodeEditControl.Controls
+namespace Fantasy.Wpf.NodeEditControl.Controls.Bases
 {
-    public abstract class PortBase:UserControl, ICanvasElementBase
+    public abstract class PortBase : UserControl, ICanvasElementBase
     {
 
         /// <summary>
@@ -24,16 +24,16 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
 
         public PortBase()
         {
-            this.ConnectedLines = new List<LineBase>();
+            ConnectedLines = new List<LineBase>();
 
 
-            this.Loaded += (s, e) =>
+            Loaded += (s, e) =>
             {
 
-                this.GetPortMark().MouseDown += (s, e) =>
+                GetPortMark().MouseDown += (s, e) =>
                 {
-                    if(e.LeftButton==MouseButtonState.Pressed)
-                        this.CreateLine();
+                    if (e.MiddleButton == MouseButtonState.Pressed)
+                        CreateLine();
                 };
 
             };
@@ -48,36 +48,38 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
         /// </summary>
         /// <returns></returns>
         protected abstract FrameworkElement GetPortMark();
-        
 
-        public Point GetSelfPoint() {
+
+        public Point GetSelfPoint()
+        {
 
             FrameworkElement fe = this;
             while (true)
-            {    if (fe.Parent == null)
+            {
+                if (fe.Parent == null)
                 {
 
                     break;
                 }
 
                 else if (fe.Parent is InkCanvas c)
-                    {
-                    
-                    var mark=this.GetPortMark();
-                   var p=  mark.TransformToAncestor(c).Transform(new Point(0,0));
+                {
+
+                    var mark = GetPortMark();
+                    var p = mark.TransformToAncestor(c).Transform(new Point(0, 0));
                     p.Y = p.Y + mark.Height / 2;
                     p.X = p.X + mark.Width / 2;
-                   
-                        return p;
-                }
-         
-                    fe = fe.Parent as FrameworkElement;
 
-                
+                    return p;
+                }
+
+                fe = fe.Parent as FrameworkElement;
+
+
             }
 
-            return new Point(0,0);
-           
+            return new Point(0, 0);
+
         }
 
         /// <summary>
@@ -87,18 +89,18 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
 
         public void UpdateLinesPosition()
         {
-            foreach (var item in this.ConnectedLines)
+            foreach (var item in ConnectedLines)
             {
 
-                if(this.PortType==PortType.Input)
+                if (PortType == PortType.Input)
                 {
-                    item.EndPoint=this.GetSelfPoint();
+                    item.EndPoint = GetSelfPoint();
                 }
                 else
                 {
-                    item.StartPiont=this.GetSelfPoint();
+                    item.StartPiont = GetSelfPoint();
                 }
-                
+
             }
         }
 
@@ -117,19 +119,19 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
         public void AddLine(LineBase line)
         {
             if (line == null) throw new ArgumentNullException();
-            if(this.ConnectedLines.Contains(line)) return;
-            this.ConnectedLines.Add(line);
+            if (ConnectedLines.Contains(line)) return;
+            ConnectedLines.Add(line);
         }
 
         public void ClearLines()
         {
-            this.ConnectedLines.Clear();
+            ConnectedLines.Clear();
         }
         public void RemoveLine(LineBase line)
         {
-            if(this.ConnectedLines.Contains(line))
+            if (ConnectedLines.Contains(line))
             {
-                this.ConnectedLines.Remove(line);
+                ConnectedLines.Remove(line);
             }
         }
 
@@ -139,73 +141,64 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
         public LineBase CreateLine()
         {
             // determined the port is input type or output type
-            
-            if(this.PortType == PortType.Input)
+
+            if (PortType == PortType.Input)
             {
-              
+
 
             }
-            else if(this.PortType==PortType.Output)
+            else if (PortType == PortType.Output)
             {
                 //if (this._createNewLine == null)
                 //{
-                    var line = this.CreateInputLine();
-                    this._createNewLine = line;
-                    if (this._createNewLine != null)
-                    {
-                        this._createNewLine.UpdateStartPoint(GetSelfPoint());
-                       // var endp = this.GetSelfPoint();
-                       //endp.X = endp.X + 15;
-                       // endp.Y= endp.Y + 10;
-                       // this._createNewLine.UpdateEndPoint(endp);
-                       // this._createNewLine.MouseMove += createNewLineMove;
-                    }
-                   // this.Canvas.CreateLine(this._createNewLine);
-                   // this.AddLine(line);
+                var line = CreateOutPutLine();
+                _createNewLine = line;
+                if (_createNewLine != null)
+                {
+                    _createNewLine.UpdateStartPoint(GetSelfPoint());
+                    // var endp = this.GetSelfPoint();
+                    //endp.X = endp.X + 15;
+                    // endp.Y= endp.Y + 10;
+                    // this._createNewLine.UpdateEndPoint(endp);
+                    // this._createNewLine.MouseMove += createNewLineMove;
+                }
+                // this.Canvas.CreateLine(this._createNewLine);
+                // this.AddLine(line);
                 //}
             }
-            return this._createNewLine;
-            
+            return _createNewLine;
+
 
         }
 
         private void createNewLineMove(object sender, MouseEventArgs e)
         {
-          if(e.MiddleButton==MouseButtonState.Pressed)
+            if (e.MiddleButton == MouseButtonState.Pressed)
             {
-                var endp = e.MouseDevice.GetPosition(this.Canvas);
+                var endp = e.MouseDevice.GetPosition(Canvas);
 
                 endp.X = endp.X + 15;
                 endp.Y = endp.Y + 10;
-                if (this._createNewLine != null)
+                if (_createNewLine != null)
                 {
-                   
-                    this._createNewLine.UpdateEndPoint(endp);
+
+                    _createNewLine.UpdateEndPoint(endp);
                 }
             }
-          else if(e.MiddleButton==MouseButtonState.Released)
+            else if (e.MiddleButton == MouseButtonState.Released)
             {
-                this._createNewLine.MouseMove -= this.createNewLineMove;
-                if(this._createNewLine.TailNode==null)
+                _createNewLine.MouseMove -= createNewLineMove;
+                if (_createNewLine.TailNode == null)
                 {
-                    this.Canvas.RemoveLine(this._createNewLine);
-                    this.ConnectedLines.Remove(this._createNewLine);
-                    this._createNewLine = null;
+                    Canvas.RemoveLine(_createNewLine);
+                    ConnectedLines.Remove(_createNewLine);
+                    _createNewLine = null;
                 }
             }
-   
+
         }
 
 
-
-        /// <summary>
-        /// set the port show line style
-        /// </summary>
-        /// <returns></returns>
-        protected virtual LineBase CreateInputLine()
-        {
-            return new ArrowLine();
-        }
 
         /// <summary>
         /// set the port show line style 
@@ -213,12 +206,12 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
         /// <returns></returns>
         protected virtual LineBase CreateOutPutLine()
         {
-            return new ArrowLine();
+            return FantasyNodeGlobalSetting.ConfigFantasy.SetLineStyle();
         }
 
 
         public List<LineBase> ConnectedLines { get; private set; }
-        public NodeCanvasBase Canvas { get; set ; }
+        public NodeCanvasBase Canvas { get; set; }
     }
 
 }

@@ -11,7 +11,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
-namespace Fantasy.Wpf.NodeEditControl.Controls
+namespace Fantasy.Wpf.NodeEditControl.Controls.Bases
 {
     public abstract class LineBase : UserControl, ICanvasElementBase
     {
@@ -28,17 +28,17 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
 
         public LineBase()
         {
-            this.Loaded += (s, e) =>
+            Loaded += (s, e) =>
             {
-                this.CommonStyle();
+                CommonStyle();
 
-                this.MouseEnter += (ss, ee) =>
+                MouseEnter += (ss, ee) =>
                 {
-                    this.WhenTouchStyle();
+                    WhenTouchStyle();
                 };
-                this.MouseLeave += (ss, ee) =>
+                MouseLeave += (ss, ee) =>
                 {
-                    this.CommonStyle();
+                    CommonStyle();
                 };
 
             };
@@ -57,7 +57,7 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
         /// </summary>
         public virtual void WhenTouchStyle()
         {
-           
+
         }
 
 
@@ -94,98 +94,101 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
 
         public void Disconnect()
         {
-            var tailPorts= this.TailNode.GetPorts();
-            if(tailPorts != null )
+            if (TailNode == null)
+                return;
+
+            var tailPorts = TailNode.GetPorts();
+            if (tailPorts != null)
             {
                 foreach (var item in tailPorts)
                 {
-                    if(item.ConnectedLines.Contains(this))
+                    if (item.ConnectedLines.Contains(this))
                         item.ConnectedLines.Remove(this);
                 }
             }
-            var headerPorts=this.HeaderNode.GetPorts();
-            if(headerPorts != null)
+            var headerPorts = HeaderNode.GetPorts();
+            if (headerPorts != null)
             {
-                foreach(var item in headerPorts)
+                foreach (var item in headerPorts)
                 {
-                    if(item.ConnectedLines.Contains(this))
+                    if (item.ConnectedLines.Contains(this))
                         item.ConnectedLines.Remove(this);
                 }
             }
 
-            this.TailNode = null;
-            this.HeaderNode = null;
+            TailNode = null;
+            HeaderNode = null;
         }
 
         public void ValidateConnectEndPort(DependencyObject control)
         {
-         
-                FrameworkElement uc =control as FrameworkElement;
-                InputPort port = null;
-                while (true)
+
+            FrameworkElement uc = control as FrameworkElement;
+            InputPort port = null;
+            while (true)
+            {
+                if (uc != null)
                 {
-                    if(uc != null)
-                     {
-                        if(uc is InputPort)
-                        {
-                            port=uc as InputPort;
-                            break;
-                        }
-                        else
-                        {
-                            
-                            uc = uc.Parent as FrameworkElement;
-                        }
+                    if (uc is InputPort)
+                    {
+                        port = uc as InputPort;
+                        break;
                     }
                     else
                     {
-                        break;
+
+                        uc = uc.Parent as FrameworkElement;
                     }
                 }
-                if(port != null)
+                else
+                {
+                    break;
+                }
+            }
+            if (port != null)
             {
 
                 // validate type is ok
 
-                if(this.HeaderNode != null)
+                if (HeaderNode != null)
                 {
-                   if( this.HeaderNode.SupportOutputTypes!=null )
+                    if (HeaderNode.SupportOutputTypes != null)
                     {
-                       var res= Tools.IsArrayIntersection<Type>(port.Node.SupportInputTypes(), this.HeaderNode.SupportOutputTypes());
-                        if(res)
+                        var res = Tools.IsArrayIntersection(port.Node.SupportInputTypes(), HeaderNode.SupportOutputTypes());
+                        if (res)
                         {
 
-                            var ports=this.HeaderNode.GetPorts();
-                            if(ports==null)
+                            var ports = HeaderNode.GetPorts();
+                            if (ports == null)
                             {
                                 throw new NullReferenceException();
                             }
-                            var outputPorts=ports.Where(x=>x.PortType==Enums.PortType.Output).ToList();
+                            var outputPorts = ports.Where(x => x.PortType == Enums.PortType.Output).ToList();
 
                             for (int i = 0; i < port.ConnectedLines.Count; i++)
                             {
-                               
-                                if(outputPorts!=null&&outputPorts.Count!=0)
+
+                                if (outputPorts != null && outputPorts.Count != 0)
                                 {
                                     for (int j = 0; j < outputPorts.Count; j++)
                                     {
-                                        var find= outputPorts[j].ConnectedLines.Where(x => x == port.ConnectedLines[i]).FirstOrDefault();
-                                        if(find!=null)
+                                        var find = outputPorts[j].ConnectedLines.Where(x => x == port.ConnectedLines[i]).FirstOrDefault();
+                                        if (find != null)
                                         {
                                             outputPorts[j].RemoveLine(find);
-                                        }    
+                                        }
                                     }
                                 }
 
-                                this.Canvas.RemoveLine(port.ConnectedLines[i]);
+                                Canvas.RemoveLine(port.ConnectedLines[i]);
                                 port.RemoveLine(port.ConnectedLines[i]);
                                 i--;
                             }
 
-                          
-                            
+
+
                             port.AddLine(this);
-                            this.TailNode = port.Node;
+                            TailNode = port.Node;
                         }
                         else
                         {
@@ -200,12 +203,12 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
                 else
                 {
                     port.AddLine(this);
-                    this.TailNode = port.Node;
+                    TailNode = port.Node;
                 }
 
-      
+
             }
-            
+
         }
 
         public void ValidateConnectStartPort(DependencyObject control)
@@ -236,15 +239,15 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
             {
                 // validate type is ok
 
-                if (this.TailNode != null)
+                if (TailNode != null)
                 {
-                    if (this.TailNode.SupportInputTypes != null)
+                    if (TailNode.SupportInputTypes != null)
                     {
-                        var res = Tools.IsArrayIntersection<Type>(port.Node.SupportOutputTypes(), this.TailNode.SupportInputTypes());
+                        var res = Tools.IsArrayIntersection(port.Node.SupportOutputTypes(), TailNode.SupportInputTypes());
                         if (res)
                         {
                             port.AddLine(this);
-                            this.HeaderNode = port.Node;
+                            HeaderNode = port.Node;
                         }
                         else
                         {
@@ -259,7 +262,7 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
                 else
                 {
                     port.AddLine(this);
-                    this.HeaderNode = port.Node;
+                    HeaderNode = port.Node;
                 }
             }
         }

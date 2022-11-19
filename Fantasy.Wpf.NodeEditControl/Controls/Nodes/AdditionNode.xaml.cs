@@ -1,4 +1,5 @@
-﻿using Fantasy.Wpf.NodeEditControl.Data;
+﻿using Fantasy.Wpf.NodeEditControl.Controls.Bases;
+using Fantasy.Wpf.NodeEditControl.Data;
 using Fantasy.Wpf.NodeEditControl.Helpers;
 
 using System;
@@ -29,6 +30,13 @@ namespace Fantasy.Wpf.NodeEditControl.Controls.Nodes
             InitializeComponent();
         }
 
+        public override string GetNodeSummary()
+        {
+            string content = "两个值相加，如果输入节点是string类型，那么将会把所有的输入节点全部转换为string，最终结果是字符串" +
+                             "的拼接";
+            return content;
+        }
+
         protected override string GetNodeName()
         {
             return "加法";
@@ -39,7 +47,7 @@ namespace Fantasy.Wpf.NodeEditControl.Controls.Nodes
             return new Size(200, 100);
         }
 
-        public override OutputData Calculate()
+        protected override OutputData CalculateImpl()
         {
             OutputData d = new OutputData();
            if (this.input1.ConnectedLines.Count==0||this.input2.ConnectedLines.Count==0)
