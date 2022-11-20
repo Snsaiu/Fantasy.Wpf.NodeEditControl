@@ -33,7 +33,7 @@ namespace Fantasy.Wpf.NodeEditControl.Controls.Dialogs
         public override void InitShow(string NodeName, ImageSource NodeLogo, string Summary)
         {
 
-            this.Title = NodeName;
+            this.Title = NodeName+" 说明";
             this.Icon = NodeLogo;
             
             this.contentLabel.Text = Summary;

@@ -21,7 +21,7 @@
 
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
                 <Label Content="常量:" Foreground="White"></Label>
-                <TextBox x:Name="inputTxt" Width="100"></TextBox>
+                <TextBlock x:Name="inputTxt" Width="100" VerticalAlignment="Center"></TextBlock>
             </StackPanel>
             
         </Grid>

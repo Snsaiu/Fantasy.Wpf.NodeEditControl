@@ -29,6 +29,8 @@ namespace Fantasy.Wpf.NodeEditControl.Controls.Bases
     /// </summary>
     public delegate void ShowSettingPanelDelegate();
 
+    public delegate void ShowCalculateResultDelegate();
+
     public abstract class NodeContainerBase : UserControl
     {
 
@@ -43,6 +45,8 @@ namespace Fantasy.Wpf.NodeEditControl.Controls.Bases
         public abstract event SetFreezeCalculateStateDelegate SetFreezeCalculateStateEvent;
 
         public abstract event ShowSettingPanelDelegate SetSettingPanelEvent;
+
+        public abstract event ShowCalculateResultDelegate ShowCalculateResultEvent;
 
         public NodeContainerBase()
         {

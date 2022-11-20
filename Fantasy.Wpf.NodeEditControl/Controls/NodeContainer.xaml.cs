@@ -31,7 +31,12 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
         public NodeContainer()
         {
             InitializeComponent();
-          
+
+            this.resultBtn.Click += (s, e) =>
+            {
+
+                this.ShowCalculateResultEvent?.Invoke();
+            };
            
             this.refreshBtn.Click += (s, e) =>
             {
@@ -64,6 +69,7 @@ namespace Fantasy.Wpf.NodeEditControl.Controls
         public override event ShowSummaryDelegate ShowSummaryEvent;
         public override event SetFreezeCalculateStateDelegate SetFreezeCalculateStateEvent;
         public override event ShowSettingPanelDelegate SetSettingPanelEvent;
+        public override event ShowCalculateResultDelegate ShowCalculateResultEvent;
 
         public override void IsCalculateNode(bool isCalculateNode)
         {

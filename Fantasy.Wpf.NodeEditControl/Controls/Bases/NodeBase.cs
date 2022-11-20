@@ -16,6 +16,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Xml.Linq;
+using Fantasy.Wpf.NodeEditControl.Controls.Dialogs;
 
 namespace Fantasy.Wpf.NodeEditControl.Controls.Bases
 {
@@ -93,7 +94,10 @@ namespace Fantasy.Wpf.NodeEditControl.Controls.Bases
             {
                 this._freezeData= this.CalculateImpl(this._settingDataValue);
             }
-     
+           
+            if (this._nodeResultPanel == null)
+                this._nodeResultPanel = this.SetNodeResultPanel();
+            this._nodeResultPanel.UpdateData(this._freezeData);
             return this._freezeData;    
 
         }
@@ -149,7 +153,38 @@ namespace Fantasy.Wpf.NodeEditControl.Controls.Bases
             DependencyProperty.Register("FreezeCalculate", typeof(bool), typeof(NodeBase), new PropertyMetadata(false));
 
 
+        public abstract NodeResultPanelBase SetNodeResultPanel();
+        
+        
+        /// <summary>
+        /// save node info dialog instance,it can make instance single model
+        /// </summary>
+        private NodeInfoDialogBase _nodeInfoDialogBase = null;
 
+        /// <summary>
+        /// save setting dialog instance,it can make instance single model
+        /// </summary>
+        private SettingDialogBase _settingDialogBase = null;
+
+        /// <summary>
+        /// save node result dialog instance,it can make instance single model
+        /// </summary>
+        private NodeResultDialogBase _nodeResultDialog = null;
+
+        /// <summary>
+        ///  save node result panel 
+        /// </summary>
+        private NodeResultPanelBase _nodeResultPanel = null;
+
+
+        /// <summary>
+        /// when setting panel update value ,call it can update node info ,
+        /// </summary>
+        /// <param name="data"></param>
+        protected virtual void UpdateNodeDisplayData(object data)
+        {
+
+        }
 
         public NodeBase()
         {
@@ -183,16 +218,48 @@ namespace Fantasy.Wpf.NodeEditControl.Controls.Bases
 
                 nc.ShowSummaryEvent += () =>
                 {
+                    if(this._nodeInfoDialogBase!=null)
+                    {
+                        this._nodeInfoDialogBase.Show();
+                    }
+                    else
+                    {
 
-                    NodeInfoDialogBase nodeInfoDialogBase =
-                        FantasyNodeGlobalSetting.ConfigFantasy.SetNodeInfoDialogStyle();
-                    nodeInfoDialogBase.ShowInTaskbar = false;
-                    nodeInfoDialogBase.InitShow(GetNodeName(),this.GetLogo(),this.GetNodeSummary());
-                    nodeInfoDialogBase.ShowDialog();
+                        NodeInfoDialogBase nodeInfoDialogBase =
+                            FantasyNodeGlobalSetting.ConfigFantasy.SetNodeInfoDialogStyle();
+                        nodeInfoDialogBase.ShowInTaskbar = false;
+                        nodeInfoDialogBase.Topmost = true;
+                        nodeInfoDialogBase.InitShow(GetNodeName(), this.GetLogo(), this.GetNodeSummary());
+                        this._nodeInfoDialogBase = nodeInfoDialogBase;
+                        this._nodeInfoDialogBase.Show();
+
+
+                    }
+
                 };
                 nc.SetFreezeCalculateStateEvent += (state) =>
                 {
                     this.FreezeCalculate = state;
+                };
+
+                nc.ShowCalculateResultEvent += () =>
+                {
+                    if (this._nodeResultDialog != null)
+                    {
+                        this._nodeResultDialog.Show();
+                    }
+                    else
+                    {
+                        var resultDialog = new DefaultNodeReultDialog();
+                        resultDialog.SetNodeWindowBaseInfo(this.GetNodeName(),this.GetLogo());
+                        if (this._nodeResultPanel == null)
+                            this._nodeResultPanel = this.SetNodeResultPanel();
+                        resultDialog.SetShowControl(this._nodeResultPanel);
+                        this._nodeResultDialog = resultDialog;
+                        this._nodeResultDialog.Show();
+                        
+                    }
+                    
                 };
                 
                 nc.CalculateEvent += () =>
@@ -212,17 +279,32 @@ namespace Fantasy.Wpf.NodeEditControl.Controls.Bases
 
                 nc.SetSettingPanelEvent += () =>
                 {
-                    SettingDialogBase settingDialog = FantasyNodeGlobalSetting.ConfigFantasy.SetSettingDialogStyle();
-                    settingDialog.SetSettingBaseInfo(this.GetNodeName(),this.GetLogo());
-                    var settingContent = this.SetSettingContent();
-                    settingDialog.SetContent(settingContent);
-                    settingContent.UpdateEvent += (data) =>
-                    {
-                        this._settingDataValue = data;
-                        this.Calculate();
 
-                    };
-                    settingDialog.Show();
+                    if (this._settingDialogBase != null)
+                    {
+                        this._settingDialogBase.Show();
+                    }
+                    else
+                    {
+                        
+                        SettingDialogBase settingDialog = FantasyNodeGlobalSetting.ConfigFantasy.SetSettingDialogStyle();
+                        
+                        settingDialog.SetSettingBaseInfo(this.GetNodeName(),this.GetLogo());
+                        var settingContent = this.SetSettingContent();
+                        settingContent.NodeBase = this;
+                        settingDialog.SetContent(settingContent);
+                        settingContent.UpdateEvent += (data) =>
+                        {
+                            this._settingDataValue = data;
+                            this.UpdateNodeDisplayData(this._settingDataValue);
+                            this.NotifyCalculate();
+                          //  this.Calculate();
+
+                        };
+                        this._settingDialogBase = settingDialog;
+                        this._settingDialogBase.Show();
+                    }
+                    
 
                 };
 

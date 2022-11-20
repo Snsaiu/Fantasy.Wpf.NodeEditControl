@@ -18,6 +18,8 @@
     <Resource Include="Images\setting.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <None Remove="Images\eye.png" />
+    <Resource Include="Images\eye.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -32,9 +34,6 @@
 
   <ItemGroup>
     <Compile Update="Controls\ArrowLine.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Update="Controls\Node.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>

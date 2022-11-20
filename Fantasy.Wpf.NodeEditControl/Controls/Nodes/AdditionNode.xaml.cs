@@ -44,9 +44,15 @@ namespace Fantasy.Wpf.NodeEditControl.Controls.Nodes
 
         protected override Size GetNodeSize()
         {
-            return new Size(200, 100);
+            return new Size(250, 100);
         }
 
+
+        protected override void UpdateNodeDisplayData(object data)
+        {
+           if(data!=null)
+                this.inputtxt.Text = data.ToString();
+        }
         protected override OutputData CalculateImpl(object data)
         {
             
@@ -144,6 +150,11 @@ namespace Fantasy.Wpf.NodeEditControl.Controls.Nodes
         public override List<Type> SupportOutputTypes()
         {
             return new List<Type> { typeof(string), typeof(int), typeof(double), typeof(float), typeof(decimal) };
+        }
+
+        public override NodeResultPanelBase SetNodeResultPanel()
+        {
+            return new AdditionNodeResultPanel();
         }
 
         public override SettingPanelBase SetSettingContent()

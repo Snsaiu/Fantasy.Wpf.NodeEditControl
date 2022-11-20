@@ -23,9 +23,17 @@
             <controls:InputPort  x:Name="input1"></controls:InputPort>
             <controls:InputPort Grid.Row="1" x:Name="input2" ></controls:InputPort>
         </Grid>
-        <Grid Grid.Column="1">
-            <TextBlock x:Name="richTxt" Background="Transparent"></TextBlock>
-        </Grid>
+        <StackPanel Grid.Column="1">
+            <StackPanel Orientation="Horizontal">
+                <Label Foreground="Gray">input 3:</Label>
+                <TextBlock x:Name="inputtxt" VerticalAlignment="Center" TextWrapping="WrapWithOverflow"></TextBlock>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Foreground="Gray">Result:</Label>
+                <TextBlock x:Name="richTxt" TextWrapping="Wrap" VerticalAlignment="Center" Background="Transparent"></TextBlock>
+            </StackPanel>
+         
+        </StackPanel>
         <Grid Grid.Column="2" Background="ForestGreen">
             <controls:OutputPort x:Name="output"></controls:OutputPort>
         </Grid>

@@ -95,6 +95,11 @@ namespace Fantasy.Wpf.NodeEditControl.Controls.Nodes
 
         }
 
+        public override NodeResultPanelBase SetNodeResultPanel()
+        {
+            throw new NotImplementedException();
+        }
+
         public override SettingPanelBase SetSettingContent()
         {
             throw new NotImplementedException();
