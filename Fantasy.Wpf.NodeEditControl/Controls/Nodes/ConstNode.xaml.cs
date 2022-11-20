@@ -28,31 +28,49 @@ namespace Fantasy.Wpf.NodeEditControl.Controls.Nodes
         {
 
             InitializeComponent();
-            this.inputTxt.Text = "1";
-            this.inputTxt.TextChanged += (s, e) =>
-            {
-                this.NotifyCalculate();
-            };
+
 
         }
+
+        protected override void UpdateNodeDisplayData(object data)
+        {
+            if (data != null)
+                this.inputTxt.Text = data.ToString();
+        }
+
         protected override OutputData CalculateImpl(object data)
         {
-            string content = this.inputTxt.Text;
             var od = new OutputData();
-            if (int.TryParse(content,out int x))
+            if (data!=null)
             {
-                od.DataType = typeof(int);
-            }
-            else if(double.TryParse(content,out double y))
-            {
-                od.DataType = typeof(double);
+                string content = data.ToString();
+
+        
+        
+                if (int.TryParse(content, out int x))
+                {
+                    od.DataType = typeof(int);
+                }
+                else if (double.TryParse(content, out double y))
+                {
+                    od.DataType = typeof(double);
+                }
+                else
+                {
+                    od.DataType = typeof(string);
+                }
+                od.Data = content;
+              
             }
             else
             {
+           
                 od.DataType = typeof(string);
+                od.Data = "";
             }
-            od.Data = content;
             return od;
+
+
         }
 
         protected override string GetNodeName()
@@ -81,9 +99,14 @@ namespace Fantasy.Wpf.NodeEditControl.Controls.Nodes
             return new List<Type> { typeof(string), typeof(int), typeof(double), typeof(float), typeof(decimal) };
         }
 
+        public override NodeResultPanelBase SetNodeResultPanel()
+        {
+            return new ConstNodeResultPanel();
+        }
+
         public override SettingPanelBase SetSettingContent()
         {
-            throw new NotImplementedException();
+            return new ConstNodeSettingPanel();
         }
 
         public override string GetNodeSummary()

@@ -33,7 +33,7 @@ namespace Fantasy.Wpf.NodeEditControl.Controls.Dialogs
      
         public override void SetSettingBaseInfo(string nodeName, ImageSource logo)
         {
-            this.Title = nodeName;
+            this.Title = nodeName+ " 属性设置";
             this.Icon = logo;
         }
 

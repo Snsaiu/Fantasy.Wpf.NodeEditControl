@@ -15,5 +15,21 @@ namespace Fantasy.Wpf.NodeEditControl.Controls.Bases
     public abstract class SettingPanelBase:UserControl
     {
         public abstract event UpdateDelegate UpdateEvent;
+
+        private NodeBase _nodeBase;
+
+        public NodeBase NodeBase
+        {
+         
+            set { _nodeBase = value; }
+        }
+
+
+        public void NotifyUpdate()
+        {
+            this._nodeBase.NotifyCalculate();
+        }
+
+
     }
 }

@@ -5,17 +5,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4dcacec3-15f1-46bc-b0b2-c1a776aa41f9" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Fantasy.Wpf.NodeEditControl/Controls/Nodes/AdditionNodeResultPanel.xaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fantasy.Wpf.NodeEditControl/Controls/Nodes/AdditionNodeResultPanel.xaml.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fantasy.Wpf.NodeEditControl/Controls/Nodes/ConstNodeResultPanel.xaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fantasy.Wpf.NodeEditControl/Controls/Nodes/ConstNodeResultPanel.xaml.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fantasy.Wpf.NodeEditControl/Controls/Nodes/ConstNodeSettingPanel.xaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fantasy.Wpf.NodeEditControl/Controls/Nodes/ConstNodeSettingPanel.xaml.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fantasy.Wpf.NodeEditControl/Images/eye.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.WpfApp3/.idea/.name" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.WpfApp3/.idea/riderMarkupCache.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.WpfApp3/.idea/riderMarkupCache.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.WpfApp3/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.WpfApp3/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Fantasy.Wpf.NodeEditControl/Controls/Bases/NodeBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Fantasy.Wpf.NodeEditControl/Controls/Bases/NodeBase.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Fantasy.Wpf.NodeEditControl/Controls/Bases/NodeContainerBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Fantasy.Wpf.NodeEditControl/Controls/Bases/NodeContainerBase.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Fantasy.Wpf.NodeEditControl/Controls/Node.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Fantasy.Wpf.NodeEditControl/Controls/Node.xaml.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy.Wpf.NodeEditControl/Controls/Bases/NodeInfoDialogBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Fantasy.Wpf.NodeEditControl/Controls/Bases/NodeInfoDialogBase.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy.Wpf.NodeEditControl/Controls/Bases/SettingDialogBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Fantasy.Wpf.NodeEditControl/Controls/Bases/SettingDialogBase.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy.Wpf.NodeEditControl/Controls/Node.xaml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fantasy.Wpf.NodeEditControl/Controls/Node.xaml.cs" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Fantasy.Wpf.NodeEditControl/Controls/NodeContainer.xaml" beforeDir="false" afterPath="$PROJECT_DIR$/Fantasy.Wpf.NodeEditControl/Controls/NodeContainer.xaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Fantasy.Wpf.NodeEditControl/Controls/NodeContainer.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Fantasy.Wpf.NodeEditControl/Controls/NodeContainer.xaml.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Fantasy.Wpf.NodeEditControl/Controls/Nodes/AdditionNode.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Fantasy.Wpf.NodeEditControl/Controls/Nodes/AdditionNode.xaml.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Fantasy.Wpf.NodeEditControl/Controls/Nodes/ConstNode.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Fantasy.Wpf.NodeEditControl/Controls/Nodes/ConstNode.xaml.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Fantasy.Wpf.NodeEditControl/Controls/Nodes/MultiplicationNode.xaml.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Fantasy.Wpf.NodeEditControl/Controls/Nodes/MultiplicationNode.xaml.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Fantasy.Wpf.NodeEditControl/Factory/FantasyNodeFactoryBase.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Fantasy.Wpf.NodeEditControl/Factory/FantasyNodeFactoryBase.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Fantasy.Wpf.NodeEditControl/Fantasy.Wpf.NodeEditControl.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Fantasy.Wpf.NodeEditControl/Fantasy.Wpf.NodeEditControl.csproj" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -24,7 +34,8 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock://G:/PROJECT/Snsaiu/Fantasy.Wpf.NodeEditControl/Fantasy.Wpf.NodeEditControl/Controls/NodeContainer.xaml.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/6d9f7861c15c488fb6e2032681d6d442ba04b0/81/c377536c/List`1.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/b6f38579d53ac41e10383ded5e9159339cd0ffd18fb4d756faea93154ba/Window.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Fantasy.Wpf.NodeEditControl/obj/Debug/net6.0-windows/Controls/Nodes/AdditionNode.g.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
@@ -43,13 +54,14 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.sourceCode.C#&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
   &quot;keyToStringList&quot;: {
     &quot;rider.external.source.directories&quot;: [
-      &quot;C:\\Users\\SNsai\\AppData\\Roaming\\JetBrains\\Rider2022.3\\resharper-host\\DecompilerCache&quot;,
-      &quot;C:\\Users\\SNsai\\AppData\\Roaming\\JetBrains\\Rider2022.3\\resharper-host\\SourcesCache&quot;,
-      &quot;C:\\Users\\SNsai\\AppData\\Local\\Symbols\\src&quot;
+      &quot;C:\\Users\\saiu\\AppData\\Roaming\\JetBrains\\Rider2022.3\\resharper-host\\DecompilerCache&quot;,
+      &quot;C:\\Users\\saiu\\AppData\\Roaming\\JetBrains\\Rider2022.3\\resharper-host\\SourcesCache&quot;,
+      &quot;C:\\Users\\saiu\\AppData\\Local\\Symbols\\src&quot;
     ]
   }
 }</component>
@@ -84,6 +96,8 @@
       <workItem from="1668776687786" duration="160000" />
       <workItem from="1668777496298" duration="1298000" />
       <workItem from="1668864699150" duration="3739000" />
+      <workItem from="1668921978643" duration="215000" />
+      <workItem from="1668923371901" duration="2507000" />
     </task>
     <task id="LOCAL-00001" summary="添加信息展示">
       <created>1668778790484</created>
@@ -122,15 +136,34 @@
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Fantasy.Wpf.NodeEditControl/Controls/Nodes/AdditionNode.xaml.cs</url>
           <line>53</line>
-          <properties documentPath="G:\PROJECT\Snsaiu\Fantasy.Wpf.NodeEditControl\Fantasy.Wpf.NodeEditControl\Controls\Nodes\AdditionNode.xaml.cs" initialLine="53" containingFunctionPresentation="method 'CalculateImpl'">
+          <properties documentPath="G:\PROJECT\Snsaiu\Fantasy.Wpf.NodeEditControl\Fantasy.Wpf.NodeEditControl\Controls\Nodes\AdditionNode.xaml.cs" initialLine="53" containingFunctionPresentation="method 'CalculateImpl'" />
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Fantasy.Wpf.NodeEditControl/Controls/Nodes/AdditionNode.xaml.cs</url>
+          <line>60</line>
+          <properties documentPath="C:\Users\saiu\source\repos\WpfApp3\Fantasy.Wpf.NodeEditControl\Controls\Nodes\AdditionNode.xaml.cs" initialLine="60" containingFunctionPresentation="method 'CalculateImpl'">
             <startOffsets>
-              <option value="1345" />
+              <option value="1584" />
             </startOffsets>
             <endOffsets>
-              <option value="1377" />
+              <option value="1646" />
             </endOffsets>
           </properties>
-          <option name="timeStamp" value="1" />
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Fantasy.Wpf.NodeEditControl/Controls/Nodes/AdditionNodeResultPanel.xaml.cs</url>
+          <line>15</line>
+          <properties documentPath="C:\Users\saiu\source\repos\WpfApp3\Fantasy.Wpf.NodeEditControl\Controls\Nodes\AdditionNodeResultPanel.xaml.cs" initialLine="15" containingFunctionPresentation="method 'UpdateData'">
+            <startOffsets>
+              <option value="394" />
+            </startOffsets>
+            <endOffsets>
+              <option value="411" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
