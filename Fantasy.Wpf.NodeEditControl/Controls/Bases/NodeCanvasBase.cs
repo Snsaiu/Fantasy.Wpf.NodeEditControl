@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Media;
 
 namespace Fantasy.Wpf.NodeEditControl.Controls.Bases
@@ -236,28 +237,28 @@ namespace Fantasy.Wpf.NodeEditControl.Controls.Bases
             {
                 for (int i = 0; i < item.ConnectedLines.Count; i++)
                 {
-
-
-
-                    foreach (var tailport in item.ConnectedLines[i].TailNode.GetPorts())
+                    LineBase line = item.ConnectedLines[i];
+                    foreach (var tailport in line.TailNode.GetPorts())
                     {
-                        if (tailport.ConnectedLines.Contains(item.ConnectedLines[i]))
+                        if (tailport.ConnectedLines.Contains(line))
                         {
-                            tailport.RemoveLine(item.ConnectedLines[i]);
+                            tailport.RemoveLine(line);
+                           
                         }
                     }
-                    item.ConnectedLines[i].TailNode = null;
+                    line.TailNode = null;
 
-                    foreach (var headerport in item.ConnectedLines[i].HeaderNode.GetPorts())
+                    foreach (var headerport in line.HeaderNode.GetPorts())
                     {
-                        if (headerport.ConnectedLines.Contains(item.ConnectedLines[i]))
+                        if (headerport.ConnectedLines.Contains(line))
                         {
-                            headerport.RemoveLine(item.ConnectedLines[i]);
+                            headerport.RemoveLine(line);
+                           
                         }
                     }
 
-                    item.ConnectedLines[i].HeaderNode = null;
-                    RemoveLineElement(item.ConnectedLines[i]);
+                    line.HeaderNode = null;
+                    RemoveLineElement(line);
 
                 }
                 item.ConnectedLines.Clear();
