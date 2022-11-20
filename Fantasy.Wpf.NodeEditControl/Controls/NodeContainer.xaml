@@ -50,6 +50,12 @@
                         </Button.Background>
 
                     </Button>
+                    <Button Width="20" x:Name="resultBtn" Margin="5,0" BorderThickness="0">
+                        <Button.Background>
+                            <ImageBrush Stretch="Uniform" ImageSource="/Fantasy.Wpf.NodeEditControl;component/Images/eye.png"/>
+                        </Button.Background>
+
+                    </Button>
                     <Button Width="20" x:Name="settingBtn"  Margin="5,0" BorderThickness="0">
                         <Button.Background>
                             <ImageBrush  Stretch="Uniform" ImageSource="/Fantasy.Wpf.NodeEditControl;component/Images/setting.png"/>
